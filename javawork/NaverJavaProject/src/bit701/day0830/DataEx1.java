@@ -31,7 +31,7 @@ public class DataEx1 {
 		// printf: 변환기호에 의한 출력, 정수:%d 실수:%f 문자:%c 문자열:%s
 		// \n:줄넘김 \t:다음탭위치로이동
 		int age = 23;
-		double weight = 567.712;
+		double weight = 56.71234567;
 		char blood = 'A';
 		String name = "캐서린";
 		System.out.printf("이름:%s\n\n", name);
