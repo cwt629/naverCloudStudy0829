@@ -27,6 +27,10 @@
         // 범위가 벗어날 경우 연예인 사진 중 하나를 나타내보자.
 
         // Self: prompt는 입력을 문자열로 받아오는데, 어떻게 숫자와의 비교가 잘 되는거지?
+        /* 질문에 대한 답변: 비교에서는 잘 되고 사실 대부분 잘 되는데, 
+            + 연산자나 switch문같은 데에서는 인식을 잘 못하기도 함.
+            맘 편히 하려면 역시 그냥 int로 바꿔서 처리하자.
+        */
         if (answer >= 1 && answer <= 15){
             imgTag = `<img alt="자동차" style="width: ${inputWidth}px;" src="../mycar/mycar${answer}.png">`;
         } else {

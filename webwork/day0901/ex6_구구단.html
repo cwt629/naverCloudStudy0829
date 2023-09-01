@@ -21,11 +21,20 @@
     -->
     <script>
         let num = prompt("구구단 숫자를 입력하세요(2~9)");
-        const IMG_LINK = "../연예인사진/"
+        let convertedNum = parseInt(num);
+        const IMG_LINK = "../연예인사진/shinsekyeong.jpg";
         // 2~9 사이 값이 아닌 경우
-        if (num < 2 || num > 9){
-            
+        if (convertedNum < 2 || convertedNum > 9 || isNaN(num) || !num){
+            document.write(`<img src="${IMG_LINK}">`);
         }
+        else{
+            // 구구단 출력하기
+            for (let i = 1; i <= 9; i++){
+                document.write(`<p>${num} x ${i} = ${num * i}</p>`);
+            }
+        }
+        
+        
     </script>
 </body>
 </html>
