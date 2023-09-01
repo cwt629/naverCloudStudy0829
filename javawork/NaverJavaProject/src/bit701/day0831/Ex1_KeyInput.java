@@ -34,7 +34,7 @@ public class Ex1_KeyInput {
 		 */
 		
 		// 해결방법1) 버퍼의 엔터문자를 먼저 읽어서 없앤다.
-		sc.nextLine();
+		//sc.nextLine();
 		System.out.println("이름을 입력하세요");
 		String name = sc.nextLine(); // 한줄 전체를 읽어온다
 		System.out.println("내 이름은 " + name + " 입니다");
