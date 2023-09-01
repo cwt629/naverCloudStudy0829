@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Dongle:wght@300&family=Gowun+Batang&family=Jua&family=Merriweather:wght@300&family=Nanum+Pen+Script&family=Raleway:wght@100&display=swap" rel="stylesheet">
+    <style>
+        /* h3의 one 클래스에 글꼴, 글자색 적용 */
+        h3.one{
+            font-family:'Jua';
+            color: blueviolet;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let answer = prompt("숫자를 입력하세요");
+        document.write(`<h3 class='one'>answer=${answer}</h3>`);
+        // 이미지 너비 입력
+        let inputWidth = prompt("이미지 너비를 입력하세요");
+        if (inputWidth == null) inputWidth = 300; // 프롬프트에서 취소 누른 경우
+
+        let imgTag = "";
+        // 1~15일 경우 해당 번호의 자동차 이미지를 나타내고,
+        // 범위가 벗어날 경우 연예인 사진 중 하나를 나타내보자.
+
+        // Self: prompt는 입력을 문자열로 받아오는데, 어떻게 숫자와의 비교가 잘 되는거지?
+        if (answer >= 1 && answer <= 15){
+            imgTag = `<img alt="자동차" style="width: ${inputWidth}px;" src="../mycar/mycar${answer}.png">`;
+        } else {
+            imgTag = `<img alt="박보영" width=${inputWidth} src="../연예인사진/parkboyoung.jpg">`;
+        }
+        document.write(imgTag);
+    </script>
+</body>
+</html>

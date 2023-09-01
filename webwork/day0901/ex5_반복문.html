@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Dongle:wght@300&family=Gowun+Batang&family=Jua&family=Merriweather:wght@300&family=Nanum+Pen+Script&family=Raleway:wght@100&display=swap" rel="stylesheet">
+    <style>
+        body *{/*body의 모든 하위 태그*/
+            font-size: 30px;
+            font-family: 'Jua';
+        }
+    </style>
+</head>
+<body>
+    <h1>반복문 for 연습</h1>
+    <script>
+        for (let i = 1; i <= 5; i++){
+            // &nbsp; : 띄어쓰기 공백 1칸 (자주 쓰는 특수문자는 ppt 12p 참고)
+            document.write(`<b>${i}</b>&nbsp;&nbsp;&nbsp;`)
+        }
+    </script>
+    <h1>mycar의 짝수번째 이미지만 출력하기(width = 150)</h1>
+    <script>
+        for (let i = 1; i <= 10; i++){
+            if (i % 2 !== 0) continue;
+            // width에 공백 없으므로 굳이 따옴표로 안감싸줘도 됨
+            // hspace & vspace : 각각 수평, 수직 간격
+            document.write(`<img width=150 src="../mycar/mycar${i}.png" border="2" hspace="10">`);
+        }
+    </script>
+</body>
+</html>

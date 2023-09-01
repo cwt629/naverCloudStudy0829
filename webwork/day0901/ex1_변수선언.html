@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // ES6 : ECMA에서 2015년에 채택된 자바스크립트 표준 
+        
+        // JS에서는 변수 선언을 굳이 안해도 되며, 선언 안하고 사용하면 전역 변수로 취급해준다.
+
+        /*
+        ES6에서 추가된 기능들
+        1. 블록범위 변수 : let(영역형 변수), const(상수) / 그 이전에는 var를 사용(함수형 변수)
+        2. 함수에서 기본 매개변수
+        3. 템플릿 리터럴(Multiline Literal) : ``
+        4. 화살표 함수
+        5. 클래스, 상속
+        6. 모듈개념 추가
+        */
+
+        // var과 let의 차이 확인하기
+        // 1. var
+        var a = 10;
+        document.write(`<h3>a=${a}</h3>`);
+        if (true)
+        {
+            // 블록 내에서 선언한 것이지만, 같은 이름이 있다면 그걸 덮어써 버린다.
+            // 즉, 바깥에 있는, 기존에 10이었던 a에 덮어씌어진다. (새로 생성하지 않음)
+            var a = 20; 
+            document.write(`<h3>a=${a}</h3>`);
+        }
+        document.write(`<h3>a=${a}</h3><hr>`); // <hr>은 수평선(horizontal)
+
+        // 2. let
+        let b = 10;
+        document.write(`<h3>b=${b}</h3>`);
+        if (true)
+        {
+            // 새로 생성한다.
+            let b = 20; 
+            document.write(`<h3>b=${b}</h3>`);
+        }
+        // 구역이 종료되면, 구역 안에 선언된 b도 소멸됨
+        document.write(`<h3>b=${b}</h3><hr>`); 
+
+        // 변수와 상수의 차이 확인하기
+        let s1 = "Hello"; // 변수 선언
+        const MSG = "Happy Day"; // 상수 선언
+        // tip: 그냥 써도 출력은 되지만 줄바꿈이 안되서, <br> 필요. h3태그는 자동 줄바꿈.
+        document.write(`<h3>s1=${s1}, MSG=${MSG}</h3>`);
+        // 값 변경
+        s1 = "안녕하세요";
+        //MSG = "반가워요!"; // Error : 상수는 값 변경 불가
+        document.write(`<h3>s1=${s1}, MSG=${MSG}</h3>`);
+
+    </script>
+</body>
+</html>
