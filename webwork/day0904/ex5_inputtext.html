@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습: input text</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Dongle:wght@300&family=Gowun+Batang&family=Jua&family=Merriweather:wght@300&family=Nanum+Pen+Script&family=Raleway:wght@100&display=swap" rel="stylesheet">
+    <style>
+        div#msg{
+            font-family: 'Gowun Batang';
+            font-size: 30px;
+            margin-top: 30px;
+            color: palevioletred;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="txtmsg">
+    <input type="button" id="btn1" value="읽기">
+    <div id="msg">Message 출력되는 곳</div>
+
+    <script>
+        let t = document.getElementById("txtmsg");
+        let btn = document.getElementById("btn1");
+        let msg = document.getElementById("msg");
+
+        // 버튼 이벤트 - 버튼 클릭 시 해당 함수가 호출된다
+        btn.onclick = function(){
+            // 입력한 문자열을 가져온다
+            let data = t.value;
+            // msg에 출력
+            //msg.innerText = "<u>" + data + "</u>"; // innerText는 태그도 그대로 문자열로 출력
+            //msg.innerHTML = "<u>" + data + "</u>"; // 기존을 덮어씌움
+            msg.innerHTML += "<br><u>" + data + "</u>"; // 기존이 유지되며 추가함
+            // 입력한 값을 지운 후 포커스를 준다(마우스 클릭했을 때처럼)
+            t.value = "";
+            t.focus();
+        }
+    </script>
+</body>
+</html>

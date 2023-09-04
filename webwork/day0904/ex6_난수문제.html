@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문제: 업다운(feat. Random)</title>
+    <style>
+        #btnrnd{
+            margin-bottom: 50px;
+        }
+
+        #resultSheet{
+            width: 500px;
+            border: 3px inset black;
+            border-radius: 3px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="새로운 난수 발생하기" id="btnrnd">
+
+    <!--
+        입력창 - OK 버튼
+        아래에 div(업다운 결과 출력)
+        그 아래 mycar 중 아무거나 하나 사진 부분
+
+        정답을 맞추면, 사진 부분에 자동차 1~15 사이 랜덤으로 이미지 출력
+    -->
+
+    <br>
+    <input type="text" id="numberInput">
+    <input type="button" value="OK" id="commitBtn">
+    <div id="resultSheet"></div>
+    <img src="" id="imgTab">
+
+    <script>
+        let rnd; // 난수를 구할 변수
+        let count = 0;
+        let inputTab = document.getElementById("numberInput");
+        let commitBtn = document.getElementById("commitBtn");
+        let resultSheet = document.getElementById("resultSheet");
+        let imgTab = document.getElementById("imgTab");
+
+        // 난수 버튼 이벤트
+        document.getElementById("btnrnd").onclick = function(){
+            // 1~100 사이의 난수 구하기
+            // JAVA에서는 (int)로 형변환한 것, 자바스크립트에서는 parseInt로 가능하다! (Math.floor보다 더 편하고 직관적인 느낌이다)
+            rnd = parseInt((Math.random() * 100)) + 1;
+            count = 0;
+            resultSheet.innerHTML = "";
+
+            alert("난수가 생성되었습니다.");
+        }
+
+        // OK버튼 클릭 시
+        commitBtn.onclick = function(){
+            // 난수 발생 안한 경우
+            if (!rnd){
+                alert("새로운 난수 발생하기 버튼을 눌러 난수를 생성해주세요.");
+                return;
+            }
+
+            let input = parseInt(inputTab.value);
+
+            // 정답 비교
+            if (input < rnd){
+                resultSheet.innerHTML += `<p>${++count}번째 시도) ${input}보다 큽니다. (Up)</p>`;
+            }
+            else if (input > rnd){
+                resultSheet.innerHTML += `<p>${++count}번째 시도) ${input}보다 작습니다. (Down)</p>`;
+            }
+            else{
+                resultSheet.innerHTML += `<p>${++count}번째 시도) 정답을 맞추셨습니다!! (${rnd})</p>`;
+                // 이미지 랜덤 추가
+                let randomPhotoNumber = parseInt((Math.random() * 15) + 1);
+                let randomURL = `../mycar/mycar${randomPhotoNumber}.png`;
+                imgTab.setAttribute("src", randomURL);
+            }
+            inputTab.value = "";
+            inputTab.focus();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습: setTimeout</title>
+    <script>
+        // window가 load될 때(처음 시작될 때) 호출할 함수
+        window.onload = function(){
+            //alert("안녕하세요");
+
+            // 사진의 요소값을 얻는다
+            let photo = document.getElementById("myPhoto");
+            // 사진의 src 속성을 변경하는 방법이다.
+            //photo.setAttribute("src", "../연예인사진/15.jpg");
+
+            // 3초 후 설현 사진(15번)으로 변경하고 싶을 경우
+            setTimeout(function(){
+                photo.setAttribute("src", "../연예인사진/15.jpg");
+            }, 3000);
+
+            // 5초 후 다시 박보영 사진(12번)으로 변경하고 싶을 경우
+            setTimeout(function(){
+                photo.setAttribute("src", "../연예인사진/12.jpg");
+            }, 5000);
+        }
+
+        // 브라우저가 닫힐 때 (작동 아직 안함. 문제 있을지도.)
+        // window.onunload = function(){
+        //     alert("안녕히가세요");
+        // }
+    </script>
+</head>
+<body>
+    <img src="../연예인사진/12.jpg" width="200" id="myPhoto">
+</body>
+</html>
