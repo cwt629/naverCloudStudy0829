@@ -3,16 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>구구단 문제1</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Dongle:wght@300&family=Gowun+Batang&family=Jua&family=Merriweather:wght@300&family=Nanum+Pen+Script&family=Raleway:wght@100&display=swap" rel="stylesheet">
     <style>
         body *{/*body의 모든 하위 태그*/
-            font-size: 30px;
+            /* font-size: 30px; */
             font-family: 'Jua';
+        }
+
+        h3.title{
+            color: blueviolet;
+            background-color: aquamarine;
+            width: 300px;
+            padding-left: 150px; /* 태그 안쪽 여백 */
+        }
+
+        h4{
+            font-family: 'Dongle';
+            color: rgb(0, 121, 255);
+            margin-left: 100px; /* 태그 바깥쪽 여백 */
         }
     </style>
 </head>
 <body>
+    <h2>구구단 입력받아 출력하기</h2>
     <!--
         [문제]
         구구단 숫자 2~9까지 입력을 받아서
@@ -21,16 +35,18 @@
     -->
     <script>
         let num = prompt("구구단 숫자를 입력하세요(2~9)");
-        let convertedNum = parseInt(num);
+        let convertedNum = parseInt(num); // 혹은 Number(num)
+        
         const IMG_LINK = "../연예인사진/shinsekyeong.jpg";
         // 2~9 사이 값이 아닌 경우
         if (convertedNum < 2 || convertedNum > 9 || isNaN(num) || !num){
-            document.write(`<img src="${IMG_LINK}">`);
+            document.write(`<img alt="신세경" src="${IMG_LINK}" width=200>`);
         }
         else{
             // 구구단 출력하기
+            document.write(`<h3 class='title'>** ${convertedNum}단 **</h3><br>`);
             for (let i = 1; i <= 9; i++){
-                document.write(`<p>${num} x ${i} = ${num * i}</p>`);
+                document.write(`<h4>${convertedNum} x ${i} = ${convertedNum * i}</h4>`);
             }
         }
         

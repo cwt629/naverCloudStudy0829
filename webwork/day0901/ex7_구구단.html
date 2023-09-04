@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>구구단 연습2</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Dongle:wght@300&family=Gowun+Batang&family=Jua&family=Merriweather:wght@300&family=Nanum+Pen+Script&family=Raleway:wght@100&display=swap" rel="stylesheet">
     <style>
-        body *{/*body의 모든 하위 태그*/
-            font-size: 30px;
-            font-family: 'Jua';
+        div.gugu{
+            float: left; /* 태그를 우측방향으로 나열 */
+            width: 150px;
+            font-family: 'Impact';
         }
     </style>
 </head>
 <body>
+    <h2>구구단 출력하기(다중for문) 연습</h2>
     <!--
         [문제]
         start와 end값을 입력받아 해당 구구단을 출력하시오 (가로 방향으로 출력)
@@ -27,6 +29,10 @@
         // start > end 인 경우는 swap
         if (start > end){
             [start, end] = [end, start];
+            // 배운 방법은 아래처럼
+            // let temp = start;
+            // start = end;
+            // end = temp;
         }
         
         // "단" 부분 표시
@@ -36,14 +42,27 @@
         document.write(`<br><hr>`);
 
         // 구구단 부분 표시
-        for (let second = 1; second <= 9; second++){
-            for (let first = start; first <= end; first++){
-                let result = first * second;
-                let resultString = (result >= 10)? result : " " + result;
-                document.write(`&nbsp;<b>${first}x${second}=${resultString}</b>&nbsp;`);
+        // for (let second = 1; second <= 9; second++){
+        //     for (let first = start; first <= end; first++){
+        //         let result = first * second;
+        //         let resultString = (result >= 10)? result : " " + result;
+        //         document.write(`&nbsp;<b>${first}x${second}=${resultString}</b>&nbsp;`);
+        //     }
+        //     document.write(`<br>`);
+        // }
+
+        // 선생님 코드: 매번 write하기보다는, 문자열 변수에 더해간다음 한번에 출력하기
+        let s = "";
+        for (let i = 1; i <= 9; i++)
+        {
+            for (let dan = start; dan <= end; dan++)
+            {
+                s += `<div class="gugu">${dan}x${i}=${dan * i}</div>`;
             }
-            document.write(`<br>`);
+            s += "<br>";
         }
+        document.write(s);
+
     </script>
 </body>
 </html>

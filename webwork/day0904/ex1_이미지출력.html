@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 출력</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Dongle:wght@300&family=Gowun+Batang&family=Jua&family=Merriweather:wght@300&family=Nanum+Pen+Script&family=Raleway:wght@100&display=swap" rel="stylesheet">
+    <style>
+        figure{
+            float: left;
+        }
+
+        /* 
+        공백: 모든 하위 태그
+        >: 바로 아래 태그 
+        */
+        figure>img{
+            width: 130px;
+            height: 160px;
+            border: 3px inset gray;
+        }
+
+        /* 보통을 바로 아래 주석처리되어있는 형태로 스타일 주는 것 권장 */
+        /*figure>figcaption>h3>b{*/
+        figure b{
+            font-family: 'Jua';
+            margin-left: 50px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <!-- 사진 밑에 각각 문자를 넣고 싶을 때
+    마구잡이로 하려고 하면 할 수는 있는데, 나중에
+    반복문에서 출력하고 하면...상당히 어려워진다. -->
+    <img alt="자동차" src="../mycar/mycar2.png" width="150">
+    <img alt="자동차" src="../mycar/mycar15.png" width="150">
+    <img alt="자동차" src="../mycar/mycar7.png" width="150">
+    <br>
+    <b>아우디</b>
+    <b style="margin-left: 100px;">뭔차야이거</b>
+    <b style="margin-left: 100px;">노랑미니</b>
+    <hr>
+
+    <!-- 아마 HTML5부터 생긴 태그: figure -->
+    <figure>
+        <img src="../연예인사진/14.jpg">
+        <figcaption>
+            <h3><b>유승호</b></h3>
+        </figcaption>
+    </figure>
+    <figure>
+        <img src="../연예인사진/6.jpg">
+        <figcaption>
+            <h3><b>한예슬</b></h3>
+        </figcaption>
+    </figure>
+    
+
+</body>
+</html>
