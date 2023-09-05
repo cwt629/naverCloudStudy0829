@@ -14,6 +14,7 @@
             border: 3px inset black;
             border-radius: 3px;
             margin-top: 50px;
+            padding: 10px;
         }
     </style>
 </head>
@@ -48,7 +49,7 @@
             // JAVA에서는 (int)로 형변환한 것, 자바스크립트에서는 parseInt로 가능하다! (Math.floor보다 더 편하고 직관적인 느낌이다)
             rnd = parseInt((Math.random() * 100)) + 1;
             count = 0;
-            resultSheet.innerHTML = "";
+            resultSheet.innerHTML += "<p>============ 새로운 난수 발생 ============</p>";
 
             alert("난수가 생성되었습니다.");
         }
