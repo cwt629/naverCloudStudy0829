@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습문제: 사진 변경</title>
+    <style>
+        #buttonSection{
+            padding: 20px 0px 40px 40px;
+        }
+
+        #buttonSection button{
+            width: 60px;
+            height: 60px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 3개의 버튼, 점점작게, 점점크게, 랜덤 
+    점점작게: 사진이 5px씩 줄어든다(50px보다 클 경우에만)
+    점점크게: 사진이 5px씩 커진다(600px보다 작을 경우에만)
+    랜덤: 1~20 사이 난수를 구한 후, 해당 번호 사진으로 변경하기
+    -->
+    <div id="buttonSection">
+        <button type="button" id="smaller">-</button>
+        <button type="button" id="bigger">+</button>
+        <button type="button" id="randomChange">?</button>
+        <br>
+        현재 사진 너비 : <span id="fsize">300</span>
+    </div>
+    <img src="../연예인사진/12.jpg" style="width: 300px;" id="photo">
+    <script>
+        let img = document.getElementById("photo");
+
+        // 1. 점점 작게
+        document.getElementById("smaller").onclick = function(){
+            let imgSizePixel = img.style.width;
+            let imgSize = parseInt(imgSizePixel, 10);
+
+            // 50px보다 크면 5px씩 감소
+            if (imgSize >= 50){
+                imgSize -= 5;
+                img.style.width = imgSize + "px";
+                fsize.innerText = imgSize;
+            }
+        }
+
+        // 2. 점점 크게
+        document.getElementById("bigger").onclick = function(){
+            let imgSizePixel = img.style.width;
+            let imgSize = parseInt(imgSizePixel, 10);
+
+            // 600px보다 작으면 5px씩 증가
+            if (imgSize <= 600){
+                imgSize += 5;
+                img.style.width = imgSize + "px";
+                fsize.innerText = imgSize;
+            }
+        }
+
+        // 3. 사진 랜덤 변경
+        document.getElementById("randomChange").onclick = function(){
+            // 1~20 사이 난수
+            let randomNumber = parseInt(Math.random() * 20) + 1;
+            let randomURL = `../연예인사진/${randomNumber}.jpg`;
+
+            // src 변경
+            img.setAttribute("src", randomURL);
+        }
+    </script>
+</body>
+</html>

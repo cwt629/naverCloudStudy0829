@@ -10,11 +10,17 @@
         }
 
         #resultSheet{
-            width: 500px;
+            width: 400px;
             border: 3px inset black;
             border-radius: 3px;
-            margin-top: 50px;
-            padding: 10px;
+            margin-top: 30px;
+            padding: 20px 10px; /* 2개만 주면 top&bottom right&left 가 되므로, 각각 주려면 인자 4개 필요 */
+        }
+
+        #imgTab{
+            position: absolute; /* 절대 좌표 : 좌상단이 (0,0) 기준 */
+            left: 200px;
+            top: 10px;
         }
     </style>
 </head>
@@ -30,10 +36,10 @@
     -->
 
     <br>
-    <input type="text" id="numberInput">
-    <input type="button" value="OK" id="commitBtn">
+    <input type="text" id="numberInput" style="width: 70px; font-size: 25px;" autofocus>
+    <button type="button" id="commitBtn" style="font-size: 25px;">OK</button>
     <div id="resultSheet"></div>
-    <img src="" id="imgTab">
+    <img src="../mycar/mycar1.png" width="200" id="imgTab">
 
     <script>
         let rnd; // 난수를 구할 변수
@@ -49,7 +55,7 @@
             // JAVA에서는 (int)로 형변환한 것, 자바스크립트에서는 parseInt로 가능하다! (Math.floor보다 더 편하고 직관적인 느낌이다)
             rnd = parseInt((Math.random() * 100)) + 1;
             count = 0;
-            resultSheet.innerHTML += "<p>============ 새로운 난수 발생 ============</p>";
+            resultSheet.innerHTML = "<p>====== 새로운 난수 발생 ======</p>";
 
             alert("난수가 생성되었습니다.");
         }

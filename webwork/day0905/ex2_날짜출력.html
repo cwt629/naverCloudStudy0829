@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습: 날짜 출력</title>
+    <style>
+        #time{
+            font-size: 40px;
+            font-family: 'Comic Sans MS';
+            background-color: #cfcfcc;
+            color: palevioletred;
+            position: absolute;
+            left: 30px;
+            top: 100px;
+            width: 500px;
+            height: 150px;
+
+            box-shadow: 5px 5px 5px pink;
+
+            text-align: center;
+            line-height: 150px; /* 행 높이 => 이를 height와 같게 주면 가운데가 됨(한줄일 경우만) */
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            // 처음 시작 시 initTime 함수 호출
+            initTime();
+
+            // 1초마다 반복 호출
+            setInterval(function(){
+                initTime();
+            }, 1000)
+        }
+        // 일반 사용자 함수
+        function initTime()
+        {
+            // 현재 날짜와 시간을 얻어서 출력
+            let date = new Date();
+            let y = date.getFullYear(); // 2023 반환해준다
+            let m = date.getMonth() + 1; // 0~11월 반환
+            let d = date.getDate();
+
+            let hh = date.getHours();
+            let mm = date.getMinutes();
+            let ss = date.getSeconds();
+
+            // 이렇게 바로도 되긴 되네..? 그래도 엘리먼트 받아와서 하는 것 권장.
+            time.innerHTML = `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
+        }
+    </script>
+</head>
+<body>
+    <div id="time"></div>
+</body>
+</html>
