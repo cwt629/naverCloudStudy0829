@@ -49,6 +49,7 @@ public class Ex11_ArrayRankInput {
 				i--;
 				continue;
 			}
+			System.out.println();
 		}
 		
 		// rank 구하기
