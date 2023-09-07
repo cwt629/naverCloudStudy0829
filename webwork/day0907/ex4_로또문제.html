@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Permanent+Marker&family=Single+Day&display=swap" rel="stylesheet">
+    <style>
+        body * {
+            font-family: 'Jua';
+        }
+
+        div#app{
+            width: 800px;
+            height: 300px;
+            background-color: aquamarine;
+        }
+
+        div#titleTab{
+            text-align: center;
+            padding-bottom: 30px;
+        }
+
+        div#lottoTab{
+            margin-left: 30px;
+            width: 730px;
+            height: 140px;
+            background-color: white;
+            border-radius: 30px;
+        }
+
+        div#buttonTab{
+            text-align: center;
+        }
+
+        div.box{
+            float: left;
+            width: 100px;
+            height: 100px;
+            
+            border-radius: 100px;
+            margin: 20px 10px;
+            text-align: center;
+            line-height: 100px;
+            font-size: 30px;
+        }
+
+        button#genButton{
+            clear: left;
+            width: 300px;
+            height: 50px;
+            border: none;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+    </style>
+    <script>
+        let lottos = [];
+        // 숫자에 따른 색깔 변화(1~10, 11~20, 21~30, 31~40, 41~45)
+        let fontColors = ["white", "black", "black", "white", "yellowgreen"];
+        let backColors = ["skyblue", "pink", "yellow", "burlywood", "purple"];
+
+        function initLotto(){
+            // lotto 숫자 구하기
+            for (let i = 0; i < 6; i++)
+            {
+                lottos[i] = parseInt(Math.random() * 45) + 1;
+                // 중복 확인
+                for (let j = 0; j < i; j++)
+                {
+                    if (lottos[i] == lottos[j]){
+                        i--;
+                        break;
+                    }
+                }
+            }
+
+            // lotto 배열 오름차순 정렬
+            for (let i = 0; i < 5; i++)
+            {
+                for (let j = i + 1; j < 6; j++)
+                {
+                    if (lottos[i] > lottos[j]){
+                        // swap
+                        let temp = lottos[i];
+                        lottos[i] = lottos[j];
+                        lottos[j] = temp;
+                    }
+                }
+            }
+
+            // 여러 개의 class 요소들을 배열 변수로 얻는다.
+            let box = document.querySelectorAll("div.box");
+            for (let i = 0; i < box.length; i++)
+            {
+                box[i].innerHTML = lottos[i];
+                // font와 background 배열에 들어갈 인덱스
+                let colorIndex = parseInt((lottos[i] - 1) / 10);
+                box[i].style.color = fontColors[colorIndex];
+                box[i].style.backgroundColor = backColors[colorIndex];
+            }
+        }
+
+        window.onload = function(){
+            // title
+            let titleTab = document.getElementById("titleTab");
+            let date = new Date();
+            let year = date.getFullYear();
+            let month = date.getMonth() + 1;
+            let day = date.getDate();
+
+            titleTab.innerHTML = `
+                <b style='color: blue;'>1026</b>회 <b style='color: gray;'>${year}-${month}-${day}</b>
+            `;
+
+            // 로또 숫자 구해놓기
+            initLotto();
+
+            // 로또 숫자 구하기 버튼 클릭 시
+            document.getElementById("genButton").onclick = function(){
+                initLotto();
+            }
+        }
+
+        
+    </script>
+</head>
+<body>
+    <div id="app">
+        <div id="titleTab"></div>
+        <div id="lottoTab">
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+        </div>
+        <div id="buttonTab">
+            <button id="genButton">로또 숫자 구하기</button>
+        </div>
+    </div>
+    
+</body>
+</html>
