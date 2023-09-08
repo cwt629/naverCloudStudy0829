@@ -14,14 +14,28 @@
             width: 800px;
             height: 300px;
             background-color: aquamarine;
+            /* 실제 예제에서는 강의 네이버카페 - 색상표 에서 powder blue 활용함
+            (b0e0e6) */
         }
 
-        div#titleTab{
+        /*
+        [tip] 협업하게 되면 서로 클래스 중복이 생길 수 있다보니
+        서로 디자인이 충돌이 생길 수 있다.
+        그래서, 쿼리에 클래스를 둘 경우
+        상위 태그들도 정의하면서
+        '누구 밑의 누구'와 같은 형태로 정의하는 것이 좋다.
+
+        다만 쿼리에 아이디를 둘 경우는 
+        굳이 누구 밑의 누구라고 안써줘도 상관은 없다.
+        */
+        div#app div#titleTab{
             text-align: center;
+            padding-top: 10px;
             padding-bottom: 30px;
+            font-size: 22px;
         }
 
-        div#lottoTab{
+        div#app div#lottoTab{
             margin-left: 30px;
             width: 730px;
             height: 140px;
@@ -29,11 +43,11 @@
             border-radius: 30px;
         }
 
-        div#buttonTab{
+        div#app div#buttonTab{
             text-align: center;
         }
 
-        div.box{
+        div#app div#lottoTab div.box{
             float: left;
             width: 100px;
             height: 100px;
@@ -43,10 +57,11 @@
             text-align: center;
             line-height: 100px;
             font-size: 30px;
+            font-family: 'Comic Sans MS';
         }
 
-        button#genButton{
-            clear: left;
+        div#app div#buttonTab button#genButton{
+            /* clear: left; */
             width: 300px;
             height: 50px;
             border: none;
@@ -54,10 +69,14 @@
             margin-top: 30px;
         }
 
+        div#app div#buttonTab button#genButton:active{
+            background-color: #ccc;
+        }
+
     </style>
     <script>
         let lottos = [];
-        // 숫자에 따른 색깔 변화(1~10, 11~20, 21~30, 31~40, 41~45)
+        // 숫자에 따른 색깔 변화(1~9, 10~18, 19~27, 28~36, 37~45)
         let fontColors = ["white", "black", "black", "white", "yellowgreen"];
         let backColors = ["skyblue", "pink", "yellow", "burlywood", "purple"];
 
@@ -77,15 +96,17 @@
             }
 
             // lotto 배열 오름차순 정렬
-            for (let i = 0; i < 5; i++)
+            for (let i = 0; i < lottos.length - 1; i++)
             {
-                for (let j = i + 1; j < 6; j++)
+                for (let j = i + 1; j < lottos.length; j++)
                 {
                     if (lottos[i] > lottos[j]){
                         // swap
-                        let temp = lottos[i];
-                        lottos[i] = lottos[j];
-                        lottos[j] = temp;
+                        // let temp = lottos[i];
+                        // lottos[i] = lottos[j];
+                        // lottos[j] = temp;
+
+                        [lottos[i], lottos[j]] = [lottos[j], lottos[i]];
                     }
                 }
             }
@@ -96,10 +117,22 @@
             {
                 box[i].innerHTML = lottos[i];
                 // font와 background 배열에 들어갈 인덱스
-                let colorIndex = parseInt((lottos[i] - 1) / 10);
-                box[i].style.color = fontColors[colorIndex];
-                box[i].style.backgroundColor = backColors[colorIndex];
+                // let colorIndex = parseInt((lottos[i] - 1) / 9);
+                // box[i].style.color = fontColors[colorIndex];
+                // box[i].style.backgroundColor = backColors[colorIndex];
+
+                // 선생님 구현: 배경색을 rgb를 이용해 임의로 변경
+                // 너무 흰색(255, 255, 255)은 나오지 않도록 0~200 사이로 받아오자
+                let r = parseInt(Math.random() * 200);
+                let g = parseInt(Math.random() * 200);
+                let b = parseInt(Math.random() * 200);
+
+                box[i].style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                
             }
+            // 글자색은 일부만 변경
+            box[1].style.color = "white";
+            box[3].style.color = "yellow";
         }
 
         window.onload = function(){
@@ -110,16 +143,26 @@
             let month = date.getMonth() + 1;
             let day = date.getDate();
 
+            // 월,일이 한자리여도 무조건 두자리로 출력하기
+            month = (month < 10)? "0" + month : month;
+            day = (day < 10)? "0" + day : day;
+
+            // 회색은 #ccc, #ddd 와 같은 형태. 값이 작을수록 진해짐
             titleTab.innerHTML = `
-                <b style='color: blue;'>1026</b>회 <b style='color: gray;'>${year}-${month}-${day}</b>
+                <b style='color: blue;'>1026</b>회 <b style='color: #aaa;'>${year}-${month}-${day}</b>
             `;
 
             // 로또 숫자 구해놓기
             initLotto();
 
             // 로또 숫자 구하기 버튼 클릭 시
-            document.getElementById("genButton").onclick = function(){
-                initLotto();
+            // 이벤트 핸들러 함수에 그냥 함수명만 넘겨줘도 됨
+            document.getElementById("genButton").onclick = initLotto;
+
+            // Self: 엔터 칠때마다 로또 바꿔보기
+            document.onkeyup = function(e){
+                if (e.keyCode == 13)
+                    initLotto();
             }
         }
 
