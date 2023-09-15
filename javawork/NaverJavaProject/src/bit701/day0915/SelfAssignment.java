@@ -19,10 +19,10 @@ public class SelfAssignment extends JFrame{
 	Image image;
 	MyCanvas myCanvas = new MyCanvas();
 	static String CAR_URL = "D:\\naver0829\\image\\mycar\\mycar2.png";
-	static String SHOP_URL = "D:\\naver0829\\image\\shop\\24.gif";
+	static String SHOP_URL_BASE = "D:\\naver0829\\image\\shop\\";
 	static String CELEB_URL = "D:\\naver0829\\image\\연예인사진\\4.jpg";
-	static String ANIMAL_URL_BASE = "D:\\naver0829\\image\\이쁜동물이미지";
-	String animalURL;
+	static String ANIMAL_URL_BASE = "D:\\naver0829\\image\\이쁜동물이미지\\";
+	String shopURL, animalURL;
 
 	public SelfAssignment(String title) {
 		super(title); // JFrame의 문자열을 받는 생성자 호출: default가 아니므로 생략 불가능
@@ -72,7 +72,7 @@ public class SelfAssignment extends JFrame{
 		JPanel panel = new JPanel();
 		// 패널에 버튼 추가
 		btnCar = new JButton("자동차");
-		btnShop = new JButton("쇼핑몰");
+		btnShop = new JButton("랜덤 쇼핑 아이템");
 		btnCeleb = new JButton("연예인");
 		btnAnimal = new JButton("귀여운 동물 뽑기!");
 		panel.add(btnCar);
@@ -99,12 +99,18 @@ public class SelfAssignment extends JFrame{
 			}
 		});
 		
-		// 2. 쇼핑몰 버튼
+		// 2. 쇼핑몰 버튼(랜덤으로 나오게)
 		btnShop.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				image = new ImageIcon(SHOP_URL).getImage();
+				// 1~34까지 난수 생성
+				int randNum = (int)(Math.random() * 34) + 1;
+				String end = (randNum == 24)? ".gif" : ".jpg";
+				String randomShopURL = randNum + end;
+				shopURL = SHOP_URL_BASE + randomShopURL;
+				
+				image = new ImageIcon(shopURL).getImage();
 				myCanvas.repaint();
 			}
 		});
@@ -126,7 +132,7 @@ public class SelfAssignment extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// 1~8까지 난수 생성
 				int randNum = (int)(Math.random() * 8) + 1;
-				String randomPhotoURL = "\\C" + randNum + ".png";
+				String randomPhotoURL = "C" + randNum + ".png";
 				animalURL = ANIMAL_URL_BASE + randomPhotoURL;
 				
 				image = new ImageIcon(animalURL).getImage();
