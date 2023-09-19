@@ -1,0 +1,30 @@
+-- scott 연습용 테이블로 조회 연습하기
+select * from emp; -- emp 테이블의 전체 데이터 조회
+select * from emp order by ename asc; -- ename의 오름차순으로 조회(asc는 생략 가능)
+select * from emp order by ename desc; -- ename의 내림차순으로 조회(desc는 생략 불가)
+select empno, ename from emp; -- 일부 컬럼만 조회
+select job from emp; -- job 컬럼만 조회
+-- 직업을 조회하되, 같은 직업인 경우 한번씩만 출력. 오름차순 정렬 조회
+select distinct job from emp order by 1; -- order by job이라 써도 되지만, 행 하나밖에 없으니 1이라 써도됨
+-- sal이 3000 이상인 것만 조회
+select * from emp where sal >= 3000;
+-- sal이 2000 이상이면서 deptno가 20인 사람 조회(and) - ename, sal, deptno
+select ename, sal, deptno from emp where sal >= 2000 and deptno = 20;
+
+-- SMITH의 데이터 조회(문자는 무조건 작은따옴표)
+select * from emp where ename = 'SMITH';
+
+-- A로 시작하는 사람들만 조회
+select * from emp where ename like 'A%'; -- %: 모든(글자길이 상관없이)
+
+-- 두번째 글자가 A인 사람만 조회
+select * from emp where ename like '_A%'; -- _: 임의의 한글자
+
+-- 세번째 글자가 A인 사람 조회는?
+select * from emp where ename like '__A%'; -- underbar 2번
+
+-- S로 시작하거나(or) J로 시작하는 모든 사람 조회는?
+select * from emp where ename like 'S%' or ename like 'J%';
+
+-- sal이 2천 이상인 사람 중에 S로 시작하는 사람 조회는?
+select * from emp where sal >= 2000 and ename like 'S%';
