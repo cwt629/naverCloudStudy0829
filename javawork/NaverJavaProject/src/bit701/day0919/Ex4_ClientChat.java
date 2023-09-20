@@ -58,7 +58,7 @@ public class Ex4_ClientChat extends JFrame implements Runnable, ActionListener{
 		// 둘다 같은 메소드 호출(기능이 같으므로)
 		tfMessage.addActionListener(this);
 		btnSend.addActionListener(this);
-		
+
 		// 서버에 접속
 		try {
 			clientSocket = new Socket(tfServerIp.getText(), 6000);
