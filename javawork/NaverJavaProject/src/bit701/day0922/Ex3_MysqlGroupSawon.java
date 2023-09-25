@@ -50,6 +50,14 @@ public class Ex3_MysqlGroupSawon {
 			
 		} catch (SQLException e) {
 			System.out.println("Mysql 연결 실패: " + e.getMessage());
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException|NullPointerException e) {
+				
+			}
 		}
 	}
 	
