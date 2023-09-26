@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Permanent+Marker&family=Single+Day&display=swap" rel="stylesheet">
+<style>
+    body * {
+        font-family: 'Jua';
+    }
+    
+    table.myTable {
+		border: 5px groove dimgray;
+		width: 800px;
+		height: 300px;
+	}
+	
+	table.myTable td, table.myTable tr {
+		border: 1px solid black;
+	}
+</style>
+<script>
+	window.onload = function(){
+		
+	}
+</script>
+</head>
+<body>
+	<!-- 
+	색깔 지정할 때,
+	일일이 그림판에서 찾아보는 것보다는
+	이쁜 색들은 찾아보면 그 코드가 이미 많다.
+	pastel color palette, concept color palette 등으로 검색하면
+	이쁜 색 많이 나온다.
+	 -->
+	<h2>ppt 48페이지 테이블 만들기</h2>
+	<table class="myTable">
+		<caption>나의 테이블</caption>
+		<tr>
+			<td rowspan="3" valign="top" bgcolor="#34A8F4">일</td>
+			<td colspan="3" align="left" valign="middle" bgcolor="#FEA5EA">이</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="left" valign="middle" bgcolor="#FEA5EA">삼</td>
+			<td rowspan="3" align="left" valign="bottom" bgcolor="#34A8F4">사</td>
+		</tr>
+		<tr>
+			<td>오</td>
+			<td>육</td>
+		</tr>
+		<tr>
+			<td colspan="3" align="left" valign="middle" bgcolor="#FEA5EA">칠</td>
+		</tr>
+	</table>
+</body>
+</html>
