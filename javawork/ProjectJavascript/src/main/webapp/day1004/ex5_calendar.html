@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>5. Calendar</title>
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Permanent+Marker&family=Single+Day&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    body * {
+        font-family: 'Jua';
+    }
+    
+    .calendar {
+		margin-top: 30px;
+	}
+	
+	.calendar table {
+		width: 600px;
+		border: 6px groove gray;
+	}
+	
+	.calendar table thead tr {
+		height: 50px;
+	}
+	
+	.calendar table tbody tr {
+		height: 60px;
+	}
+	
+	.calendar table thead tr th {
+		font-size: 25px;
+		background-color: aquamarine;
+		color: blue;
+		text-align: center;
+		border-bottom: 3px double gray;
+	}
+</style>
+<script>
+	window.onload = function(){
+		// 현재 년도와 월 구하기
+		//let date = new Date();
+		//let curYear = date.getFullYear();
+		//let curMonth = date.getMonth() + 1;
+		
+		// option 추가(년)
+		let yearOptions = ``;
+		for (let year = curYear; year >= 1950; year--){
+			yearOptions += `<option>${year}</option>`;
+		}
+		document.querySelector(".selyear").innerHTML = yearOptions;
+		
+		// option 추가(월)
+		let monthOptions = ``;
+		for (let month = 1; month <= 12; month++){
+			if (month == curMonth)
+				monthOptions += `<option selected>${month}</option>`;
+			else monthOptions += `<option>${month}</option>`;
+		}
+		document.querySelector(".selmonth").innerHTML = monthOptions;
+		
+		// 처음 시작 시, 달력을 출력한다
+		calendarView();
+		
+		// 년도 변경 이벤트
+		document.querySelector(".selyear").onchange = function(){
+			curYear = parseInt(this.value);
+			calendarView();
+		}
+		
+		// 월 변경 이벤트
+		document.querySelector(".selmonth").onchange = function(){
+			curMonth = parseInt(this.value);
+			calendarView();
+		}
+	}
+	
+	// 달력을 출력하는 함수
+	function calendarView(){
+		console.log(curYear, curMonth);
+		// 해당 월의 1일의 요일 숫자
+		let date2 = new Date(curYear, curMonth - 1, 1); // 특정 년, 월, 일에 대한 정보(월은 +1했던거 다시 -1해서 보내야 함)
+		let weekday = date2.getDay();
+		console.log("1일의 요일: " + weekday);
+		
+		// 해당 년도의 해당 월이 며칠까지 있는지 구하기
+		let endday;
+		let isLeapYear = curYear % 4 == 0 && curYear % 100 != 0 || curYear % 400 == 0; // 윤년 여부
+		switch(curMonth){
+			case 2:
+				endday = (isLeapYear)? 29 : 28;
+				break;
+				
+			case 4:
+			case 6:
+			case 9:
+			case 11:
+				endday = 30;
+				break;
+			default:
+				endday = 31;
+		}
+		
+		console.log("endday: " + endday);
+		
+		let s = 
+			`
+			<table class="table table-bordered">
+				<caption align="top"><h3>${curYear}년 ${curMonth}월 달력</h3></caption>
+				<thead>
+					<tr>
+						<th>일</th><th>월</th><th>화</th><th>수</th>
+						<th>목</th><th>금</th><th>토</th>
+					</tr>
+				</thead>
+				<tbody>
+			`;
+		
+		// 앞에 빈칸부분
+		s += "<tr>";
+		for (let i = 1; i <= weekday; i++){
+			s += "<td></td>";
+		}
+		// 1~endday까지 출력(단, 토요일은 </tr><tr>)
+		for (let i = 1; i <= endday; i++)
+		{
+			++weekday;
+			// 출력 후 7의 배수일때 tr 닫기
+			let color = (weekday % 7 == 1)? "red" : "black";
+			s += `<td style="color: ${color}">${i}</td>`;
+			if (weekday % 7 == 0 && i < endday){
+				s += `</tr><tr>`;
+			} else if (weekday % 7 == 0 && i == endday){
+				s += "</tr>";
+			}
+		}
+		
+		// 마지막 부분 빈칸들로 나눠주기
+		for (let i = weekday; i % 7 > 0; i++){
+			s += `<td style="color: #ccc;">${i - weekday + 1}</td>`;
+		}
+		
+		// [선생님 풀이] 나머지 칸 그리기(토요일까지 칸이 그려지지 않은 경우만 해당)
+		/*
+		let n = 1;
+		if (weekday % 7 != 0){
+			while (true){
+				weekday++;
+				s += `<td style="color:#ccc;">${n++}</td>`;
+				if (weekday % 7 == 0)
+					break;
+			}
+			s += "</tr>";
+		}
+		*/
+		s += "</tr>";
+		
+		s += "</tbody></table>";
+		
+		document.querySelector(".calendar").innerHTML = s;
+	}
+</script>
+</head>
+<body>
+	<script>
+		// 현재 년도와 월 구하기
+		let date = new Date();
+		let curYear = date.getFullYear();
+		let curMonth = date.getMonth() + 1;
+		//console.log(curYear, curMonth);
+	</script>
+	<div style="margin: 50px;">
+		<div class="input-group" style="width: 300px;">
+			<select class="form-select selyear">
+				
+			</select>
+			년
+			&nbsp;
+			<select class="form-select selmonth">
+				
+			</select>
+			월
+		</div>
+		
+		<div class="calendar"></div>
+	</div>
+</body>
+</html>

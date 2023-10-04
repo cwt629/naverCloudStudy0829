@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>6. 앨범 문제</title>
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Permanent+Marker&family=Single+Day&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    body * {
+        font-family: 'Jua';
+    }
+    
+    select.colNumber{
+		width: 50px;
+		/*margin-top: 50px;*/
+	}
+    
+    #album {
+		margin-top: 30px;
+	}
+	
+	#album table {
+		width: 400px;
+		border: 6px groove gray;
+	}
+	
+	#album table tr td {
+		width: 120px;
+		height: 120px;
+	}
+	
+	#album table tr td img{
+		width: 100px;
+		height: 100px;
+	}
+</style>
+<script>
+	const PHOTO_NUMBERS = 34;
+	
+	window.onload = function(){
+		// 초기 상태: 4칸짜리 앨범
+		drawTable(4);
+		
+		// 각 행의 사진 개수 선택 이벤트
+		document.querySelector("select.colNumber").onchange = function(){
+			let colNumber = parseInt(this.value);
+			drawTable(colNumber);
+		}
+	}
+	
+	// 각 행에 colNumber개 있을 때, 그에 맞게 table을 출력하는 함수
+	function drawTable(colNumber){
+		let table =
+		`
+			<table class="table table-bordered">
+				<caption align="top"><h3>쇼핑몰 ${colNumber}칸 앨범</h3></caption>
+		`;
+		// 위에서부터 table 그리기
+		let number = 1;
+		while (number <= PHOTO_NUMBERS){
+			table += "<tr>";
+			for (let i = 0; i < colNumber; i++){
+				// 사진 출력
+				if (number <= PHOTO_NUMBERS){
+					// 확장자(24번만 gif, 나머지는 jpg)
+					let extension = (number == 24)? "gif" : "jpg";
+					table += `<td><img src="../shop/${number}.${extension}"></td>`;
+				}
+				// 모든 사진을 출력한 뒤인 경우는 빈칸 출력
+				else table += "<td></td>";
+				
+				number++;
+			}
+			
+			table += "</tr>";
+		}
+		
+		table += "</table>";
+		
+		// 문서 반영
+		document.getElementById("album").innerHTML = table;
+		// 표 크기 반영
+		document.querySelector("#album table").style.width = `${100 * colNumber}px`;
+	}
+</script>
+</head>
+<body>
+	<!--
+	[문제]
+	table을 만들고
+	td 안에 shop 사진 34개를 넣기
+	행마다 n개 집어넣음(n은 select로, 3~7 범위 선택 가능) 
+	-->
+	<div class="input-group selector" style="width: 350px;">
+		<h3>이미지 열 개수 선택</h3>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<select class="form-select colNumber">
+			<option>3</option>
+			<option selected>4</option>
+			<option>5</option>
+			<option>6</option>
+			<option>7</option>
+		</select>	
+	</div>
+	
+	<div id="album"></div>
+</body>
+</html>
