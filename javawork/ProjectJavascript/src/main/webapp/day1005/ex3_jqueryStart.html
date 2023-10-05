@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>3. jQuery 시작</title>
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Permanent+Marker&family=Single+Day&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<style>
+    body * {
+        font-family: 'Jua';
+    }
+</style>
+<script>
+	/*
+	$ : jQuery라는 뜻
+	*/
+	
+	/*window.onload = function(){
+		
+	}*/
+	
+	/*
+	jQuery에서는 window.onload도 가능은 하지만,
+	시작 방법이 따로 있다.
+	*/
+	
+	// 방법 1: 시작 함수
+	/*$(document).ready(function(){
+		alert("시작합니다");
+	});*/
+	
+	// 방법 2: 시작 함수
+	$(function(){
+		//alert("시작합니다!");
+		
+		// css("속성", "값") : 속성값 변경(setter)
+		$("div.diva>h3").css("color", "red"); // 저 쿼리에 해당하는 애들의 스타일 변경
+		
+		// 속성 여러개를 변경하고자 할 경우?
+		// 방법 1
+		$("div.divb>h3").css("color", "green").css("background-color", "yellow");
+		// 방법 2
+		$("div.diva").css({
+			"border": "5px double gray",
+			"width": "300px",
+			"height": "160px",
+			"border-radius": "30px",
+			"background-color": "#ffddff"
+		});
+		
+		// css("속성") : 해당 속성값 반환(getter) - 메소드 오버로딩 느낌
+		let a = $("div.diva").css("border"); // border값 얻기
+		//console.log(a); // 결과: 5px double rgb(128, 128, 128)
+		// div.divc에 적용(divc가 2개 이상이므로 배열로 받아와지는데, 거기에 css() 적용할 수 있다)
+		$("div.divc").css("border", a);
+		
+		// eq : selector가 여러개일 때, 순서를 지정해서 적용시키고자 할 경우
+		$("div.divc:eq(0)").css("width", "200px");
+		$("div.divc").eq(1).css("border-color", "orange");
+		
+		// first & last : 제일 처음/마지막 요소에 적용하기
+		$("div.diva>h3:first").css("font-family", "Gamja Flower");
+		//console.log($("div.diva>h3")) // TODO : 자습 때 한번 보자!
+		//console.log($("div.diva>h3").length) // TODO : 자습 때 한번 보자!
+		/*for (let i = 0; i < $("div.diva>h3").length; i++){
+			console.log($("div.diva>h3")[i]);
+		}*/
+		$("div.diva>h3:last").css("font-family", "Lobster"); // 마지막 태그만 변경
+		
+		$("div.divc").first().css("background-color", "lime");
+		$("div.divc").last().css("background-color", "gold");
+		
+		// gt(Greater Than) & lt(Less Than)
+		/* 
+		gt(n) : n번 이후부터 적용(n번은 적용 안된다)
+		lt(n) : n번 미만까지 적용(n번은 적용 안된다)
+		*/
+		$("div.divd>img:gt(3)").css({
+			"width": "100px",
+			"height": "100px",
+			// inset: border의 상하좌우 중 상&좌는 진하고, 하&우는 연함
+			// outset: border의 상하좌우 중 상&좌는 연하고, 하&우는 진함
+			"border": "3px inset blue"
+		}); // 결과: 4, 5번 사진
+		
+		$("div.divd>img:lt(3)").css({
+			"width": "100px",
+			"height": "100px",
+			"border": "3px double red"
+		}); // 결과: 0, 1, 2번 사진
+		
+		// css값을 얻어서 한줄로 바로 적용시켜보자
+		$("div.divd>img:eq(1)").css("background-color", $("div.divc:eq(0)").css("background-color"));
+	});
+	
+</script>
+</head>
+<body>
+	<div class="diva">
+		<h3>Happy Day!!</h3>
+		<h3>Nice Day!!</h3>
+		<h3>Good Day!!</h3>
+		<h3>Bad Day..</h3>
+	</div>
+	<div class="divb">
+		<h3>Happy Day!!</h3>
+		<h3>Nice Day!!</h3>
+		<h3>Good Day!!</h3>
+	</div>
+	<div class="divc">
+		<div class="childa">안녕하세요</div>
+		<div class="childb">반가워요</div>
+	</div>
+	<div class="divc">
+		<div class="childa">안녕하세요</div>
+		<div class="childb">반가워요</div>
+	</div>
+	<div class="divd">
+		<img src="../image/C3.png">
+		<img src="../image/C4.png">
+		<img src="../image/C5.png">
+		<img src="../image/C6.png">
+		<img src="../image/C7.png">
+		<img src="../image/C8.png">
+	</div>
+</body>
+</html>
