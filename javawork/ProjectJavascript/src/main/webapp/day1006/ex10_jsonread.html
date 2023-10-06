@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>10. 과제 : json 읽기</title>
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Permanent+Marker&family=Single+Day&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<style>
+    body * {
+        font-family: 'Jua';
+    }
+    
+    div.show>table.shop {
+		margin: 30px;
+		width: auto;
+	}
+	
+	div.show>table.shop tr td.photo>img {
+		width: 150px;
+		height: 150px;
+	}
+	
+	div.show>table.shop tr td.info>div.colorPoint {
+		width: 30px;
+		height: 30px;
+		border-radius: 30px;
+		float: left;
+		margin: 0px 5px;
+	}
+	
+</style>
+<script>
+	$(function(){
+		let arr = [
+			{sname: "모자", photo: "../shop/23.jpg", color: ["orange", "gray", "blue"], price: 10000},
+			{sname: "머리띠", photo: "../shop/30.jpg", color: ["yellow", "green", "magenta", "black"], price: 17000},
+			{sname: "신발", photo: "../shop/14.jpg", color: ["#ffb6c1", "#90ee90", "#87cefa", "#ff69b4"], price: 35000},
+			{sname: "자켓", photo: "../shop/31.jpg", color: ["pink", "tomato", "lime"], price: 56000}
+		];
+		
+		let tableComponent = `<table class="table table-bordered shop">`;
+		
+		$.each(arr, function(index, data){
+			let row = "<tr>";
+			// 1열: 사진
+			row += `<td class="photo"><img src=${data.photo}></td>`;
+			
+			// 2열
+			row += `<td class="info">`;
+			// 2-1. 상품명
+			row += `<h5>${data.sname}</h5>`;
+			// 2-2. 상품 가격
+			row += `<h6>${data.price}원</h6>`;
+			
+			// 2-3. 색상들
+			$.each(data.color, function(colorIndex, colorData){
+				row += `<div class="colorPoint" style="background-color: ${colorData};"></div>`;
+			})
+			
+			row += "</td></tr>";
+			// 완성된 행을 추가해준다
+			tableComponent += row;
+		})
+		
+		tableComponent += "</table>";
+		$("div.show").html(tableComponent);
+	});
+</script>
+</head>
+<body>
+	<div class="show"></div>
+</body>
+</html>
