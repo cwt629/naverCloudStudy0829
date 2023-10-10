@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>7. 문제: form tag</title>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Permanent+Marker&family=Single+Day&display=swap"
+		rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+	<style>
+		body * {
+			font-family: 'Jua';
+		}
+		
+		table.mainTable {
+			margin: 20px;
+			width: auto;
+		}
+		
+		#resultbtn {
+			margin: 5px 100px;
+		}
+		
+		#result {
+			margin: 20px;
+		}
+		
+	</style>
+	<script>
+
+	</script>
+</head>
+
+<body>
+	<table class="table table-bordered mainTable">
+		<tr>
+			<td>이름</td>
+			<td>
+				<input type="text" class="form-control" id="nametag">
+			</td>
+		</tr>
+		<tr>
+			<td>성별</td>
+			<td>
+				<label>
+					<input type="radio" name="gender" value="여자">여자
+				</label>
+				&nbsp;&nbsp;
+				<label>
+					<input type="radio" name="gender" value="남자" checked>남자
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td>자격증</td>
+			<td>
+				<label>
+					<input type="checkbox" class="license" value="운전면허2종">운전면허2종
+				</label>
+				<br>
+				<label>
+					<input type="checkbox" class="license" value="정보처리기사">정보처리기사
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td>글자색</td>
+			<td>
+				<label>
+					<input type="radio" name="fontColor" value="red">빨강
+				</label>
+				&nbsp;
+				<label>
+					<input type="radio" name="fontColor" value="blue">파랑
+				</label>
+				&nbsp;
+				<label>
+					<input type="radio" name="fontColor" value="green">초록
+				</label>
+				&nbsp;
+				<label>
+					<input type="radio" name="fontColor" value="black" checked>검정
+				</label>
+			</td>
+		</tr>
+	</table>
+	<button type="button" id="resultbtn" class="btn btn-outline-success">결과 출력</button>
+	<div id="result"></div>
+	
+	<script>
+		// 버튼 클릭 이벤트
+		$("#resultbtn").click(function(){
+			// 각 데이터 받아오기
+			let name = $("#nametag").val(); // 이름
+			let gender = $("input[name='gender']:checked").val(); // 성별
+			
+			// 자격증 배열
+			let certs = [];
+			$("input.license").each(function(){
+				// 체크된 자격증의 value 저장
+				if ($(this).is(":checked")){
+					certs.push($(this).val());
+				}
+			})
+			// 자격증에 대해 출력할 메세지
+			let certResult = "";
+			if (certs.length > 0){
+				for (let i = 0; i < certs.length; i++){
+					if (i > 0) certResult += ", ";
+					certResult += certs[i];
+				}
+			}
+			else certResult = "해당 없음";
+			
+			// 글자색
+			let fontColor = $("input[name='fontColor']:checked").val();
+			
+			// 전체 출력(색상도 변경해준다)
+			let result =
+			`
+			<h4>당신의 정보입니다.</h4>
+			<b>이름: ${name}</b><br>
+			<b>성별: ${gender}</b><br>
+			<b>자격증: ${certResult}</b>
+			`;
+			
+			$("#result").html(result).css("color", fontColor);
+		})
+	</script>
+</body>
+
+</html>
