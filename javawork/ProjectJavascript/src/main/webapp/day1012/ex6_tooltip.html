@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>6. 툴팁</title>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Permanent+Marker&family=Single+Day&display=swap"
+		rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+	<style>
+		body * {
+			font-family: 'Jua';
+		}
+
+		.mytooltip {
+			position: absolute;
+			line-height: 1.5;
+			color: black;
+			width: 200px;
+			background-color: #f90;
+			border: 2px solid white;
+			padding: 10px;
+			font-size: 14px;
+			border-radius: 30px;
+			opacity: 0.8;
+			display: none;
+		}
+		
+		.view {
+			cursor: pointer;
+			text-decoration: underline;
+			background-color: #ccc;
+		}
+		
+		ol.today li{
+			cursor: pointer;
+			background-color: #ccc;
+		}
+		
+		ol.today li:hover {
+			background-color: rgba(0, 0, 0, 0.3);
+		}
+	</style>
+	<script>
+		$(function () {
+			$("a").bind({
+				mousemove: function (e) {
+					$("div.mytooltip").css({
+						"left": e.pageX + "px",
+						"top": e.pageY + "px"
+					});
+				},
+				mouseover: function () {
+					$("div.mytooltip").fadeIn('fast');
+				},
+				mouseout: function () {
+					$("div.mytooltip").fadeOut('fast');
+				}
+			})
+			
+			$(".view").bind({
+				mousemove: function (e) {
+					
+					$("div.mytooltip").css({
+						"left": e.pageX + "px",
+						"top": e.pageY + "px"
+					});
+				},
+				mouseover: function () {
+					let color = $(this).attr("color");
+					//let text = $(this).text();
+					let text = $(this).attr("content");
+					$("div.mytooltip").css("color", color).html(text);
+					$("div.mytooltip").fadeIn('fast');
+				},
+				mouseout: function () {
+					$("div.mytooltip").fadeOut('fast');
+				}
+			})
+			
+			$("ol.today li").bind({
+				mousemove: function (e) {
+					$("div.mytooltip").css({
+						"left": e.pageX + "px",
+						"top": e.pageY + "px"
+					});
+				},
+				mouseover: function () {
+					let photo = $(this).attr("photo");
+					let text = $(this).text();
+					$("div.mytooltip").html(`<b>${text}</b><br><img src="${photo}" border=2 width=100>`);
+					$("div.mytooltip").fadeIn('fast');
+				},
+				mouseout: function () {
+					$("div.mytooltip").fadeOut('fast');
+				}
+			})
+		})
+	</script>
+</head>
+
+<body>
+	<h4 class="alert alert-danger">Tooltip 링크에 마우스를 올려보세요</h4>
+	<br><br>
+	<a style="font-size: 25px; cursor: url('../jquery/cd-sprite.png');">
+		Tooltip Tooltip Tooltip Tooltip
+	</a>
+
+	<!-- pre : preview. 보이는 그대로 출력..? -->
+	<pre>
+[헤럴드POP=박서현기자]전소미가 <b class="view" color="green" content="남자친구나 여자친구가 있는지?">연애 질문</b>에 쿨하게 답했다.
+
+지난 11일 전소미는 자신의 채널을 통해 <b class="view" color="blue" content="온라인으로 실시간 방송하는 것">라이브 방송</b>을 진행했다. 소통 중 전소미는 한 네티즌이 "연애를 하고 있느냐"라고 묻자 "(연애를 하고 있다면) 덜 익은 파스타를 혼자 안 먹을 것 같다"며 재치있는 답변을 남겼다.
+
+전소미는 이제껏 연애 관련 질문이 왔을 때 피하지 않고 솔직하게 답해왔다. 티빙 오리지널 예능 '마녀사냥 2023'에 출연했던 전소미는 "연애할 때 저는 배울 게 많고 줄 게 많은 사람이 갑이고 그 사람한테 배워 나가는 사람이 을이라고 생각하는데 그렇게 따지고 봤을 때 저는 갑인 거 같다", "연애할 때 찌질하다", "전 남자친구에게는 100% 연락왔다" 등 발언을 한 바 있다.
+
+뿐만 아니라 유튜브 채널 <b class="view" color="magenta" content="이건 무슨 유튜브 채널인 거여">'황태와 양미리'</b>에서도 전소미는 "진짜 솔직하게 말하면 중학교 때 한명 사귀어봤다. 축구부였던 친구다. 김우빈 느낌이었다"면서도 "나랑 한 2주 만나다 내 친구를 만났다"며 분노에 차 실명을 내질러 음소거 처리가 되기도 했다.
+
+전소미 뿐 아니라 최근 방탄소년단 정국과 RM도 '연애' 질문에 직접적으로 반응하고 답을 했다. 정국은 지난 2일 "자꾸 글이 보여서 그러는데 여자친구 없다. 지금은 일만 하고 싶다. 여자친구는 아미(팬덤명)로 하자. 지금은 진짜 아미밖에 없다"라고 했으며, RM은 지난 10일 '당신의 여자친구를 소개해 달라'는 댓글에 "정말 원하지만 지금은 없다"면서 "소개해 줄 수 있냐"며 센스있게 답을 내놨다.
+
+한편 전소미는 지난 8월 새 앨범 'Game Plan'(게임 플랜)을 발매하고, 타이틀곡 'Fast Forward'(패스트 포워드)로 활동했다.
+	</pre>
+	<hr>
+	<h2>오늘 나의 식사 및 쇼핑 목록</h2>
+	<ol type="1" class="today">
+		<li photo="../food/1.jpg">에그샌드위치</li>
+		<li photo="../food/11.jpg">망고빙수</li>
+		<li photo="../shop/8.jpg">회색스웨터</li>
+		<li photo="../shop/29.jpg">여름용모자</li>
+	</ol>
+	
+
+	<div class="mytooltip">
+		Java<br>
+		HTML5<br>
+		SpringBoot<br>
+		React<br>
+		jQuery
+	</div>
+</body>
+
+</html>

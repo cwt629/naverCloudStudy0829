@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>7. canvas</title>
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Permanent+Marker&family=Single+Day&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<style>
+    body * {
+        font-family: 'Jua';
+    }
+    
+    #mypen>div {
+		width: 30px;
+		height: 30px;
+		float: left;
+		margin-right: 3px;
+		border: 1px solid black;
+		cursor: pointer;
+	}
+</style>
+<script>
+	$(function(){
+		let draw = false; // 마우스를 클릭 시 true, 놓으면 false
+		let can = document.getElementById("can");
+		let ctx = can.getContext("2d");
+		let preX, preY; // mousemove 시에 이전 좌표로 현재 좌표 저장
+		// 초기 펜 색상
+		ctx.strokeStyle = "black"; // 선 색
+		// 초기 펜 굵기
+		ctx.lineWidth = 3;
+		// 선의 끝모양
+		ctx.lineCap = "round"; // 뾰족하면 선이 매끄럽게 그어지지 않아, 둥그런 끝을 사용(약간 물파스 느낌인가..?)
+		
+		// 이벤트 : 캔버스에 그림을 그리기 위한 이벤트들
+		$("#can").bind({
+			mousedown: function(e){
+				draw = true;
+				// 현재 좌표를 저장해둔다
+				preX = e.pageX;
+				preY = Number(e.pageY) - 100;
+			},
+			mouseup: function(e){
+				draw = false;
+			},
+			mousemove: function(e){
+				if (draw){
+					// 시작과 끝을 알려줘야 한다.
+					ctx.beginPath();
+					ctx.moveTo(preX, preY); // 선을 그리기 위한 위치로 이동 (from)
+					ctx.lineTo(e.pageX, Number(e.pageY) - 100); // 현재 좌표까지 선을 그린다 (to)
+					
+					ctx.stroke(); // 실제 선 그려주기
+					ctx.closePath();
+					
+					// 다시 현재 좌표를 직전 좌표로 저장해둔다
+					preX = e.pageX;
+					preY = Number(e.pageY) - 100;
+				}
+			}
+		});
+		
+		// 화면 초기화
+		$("#btn1").click(function(){
+			ctx.clearRect(0, 0, 500, 500); // 해당 영역만큼 지워준다
+		});
+		
+		// 색상표 클릭 시 펜의 색상을 변경한다
+		$("#mypen>div").click(function(){
+			let pen = $(this).css("background-color");
+			ctx.strokeStyle = pen; // 색깔 적용
+		});
+		
+		// 지우개
+		$("#btn2").click(function(){
+			ctx.strokeStyle = "#fff"; // 선색을 흰색으로 변경
+		});
+		
+		// 별도 보관
+		$("#btn3").click(function(){
+			let myimg = `<img src="${can.toDataURL()}">`;
+			$("hr.save").after(myimg);
+		});
+	});
+</script>
+</head>
+<body>
+	<h4 class="alert alert-info">HTML5의 Canvas를 이용한 간단 그림판</h4>
+	<br>
+	<!-- canvas는 width와 height를 style이 아니라 속성으로 줘야 한다!! -->
+	<canvas id="can" width="500" height="500" style="border: 1px solid black; cursor: crosshair;"></canvas>
+	<div id="mypen">
+		<div style="background-color: black;"></div>
+		<div style="background-color: orange;"></div>
+		<div style="background-color: #7fffd4;"></div>
+		<div style="background-color: #8a2be2;"></div>
+		<div style="background-color: #deb887;"></div>
+		<div style="background-color: #7fff00;"></div>
+		<div style="background-color: #d2691e;"></div>
+		<div style="background-color: #ff7f50;"></div>
+		<div style="background-color: #6495ed;"></div>
+		<div style="background-color: #dc143c;"></div>
+		<div style="background-color: #483d8b;"></div>
+		<div style="background-color: #556b2f;"></div>
+		<div style="background-color: #ff1493;"></div>
+		<div style="background-color: #191970;"></div>
+		<div style="background-color: #48d1cc;"></div>
+		<div style="background-color: #00ff7f;"></div>
+		<div style="background-color: #008080;"></div>
+		<div style="background-color: #9370d8;"></div>
+	</div>
+	<br style="clear: both;"><br>
+	<button type="button" id="btn1" class="btn btn-outline-danger btn-sm">화면 초기화</button>
+	<button type="button" id="btn2" class="btn btn-outline-danger btn-sm">지우개</button>
+	<button type="button" id="btn3" class="btn btn-outline-danger btn-sm">별도보관</button>
+	<hr class="save">
+</body>
+</html>
