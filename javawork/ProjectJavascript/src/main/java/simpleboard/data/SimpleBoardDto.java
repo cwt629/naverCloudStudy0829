@@ -10,6 +10,8 @@ public class SimpleBoardDto {
 	private String photo;
 	private int readcount;
 	private Timestamp writeday;
+	// 댓글 개수를 저장하기 위한 변수
+	private int answerCount;
 
 	public String getNum() {
 		return num;
@@ -65,6 +67,14 @@ public class SimpleBoardDto {
 
 	public void setWriteday(Timestamp writeday) {
 		this.writeday = writeday;
+	}
+
+	public int getAnswerCount() {
+		return answerCount;
+	}
+
+	public void setAnswerCount(int answerCount) {
+		this.answerCount = answerCount;
 	}
 
 }
