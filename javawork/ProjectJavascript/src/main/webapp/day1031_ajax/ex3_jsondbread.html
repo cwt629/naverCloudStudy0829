@@ -50,6 +50,10 @@
 		color: #555;
 	}
 	
+	b.subject {
+		cursor: pointer;
+	}
+	
 	span.listwriter {
 		font-size: 10px;
 		color: #555;
@@ -58,6 +62,23 @@
 	span.day, span.visit {
 		font-size: 10px;
 		color: #888;
+	}
+	
+	.mytooltip {
+		position: absolute;
+		color: black;
+		width: auto;
+		background-color: #f90;
+		border: 2px solid white;
+		padding: 10px;
+		font-size: 14px;
+		border-radius: 30px;
+		/*opacity: 0.8;*/
+		display: none;
+	}
+	
+	.mytooltip img {
+		border-radius: 30px;
 	}
 	
 </style>
@@ -78,6 +99,48 @@
 			$(".boardgrid").css("color", "black");
 			list();
 		});
+		
+		// list 제목 클릭 시, 해당 내용만 나오게 하기
+		$(document).on("click", "b.subject", function(){
+			$("div.innercontent").slideUp("slow");
+			$(this).parent().next().slideDown("slow");
+		});
+		
+		/*
+		$("div.mycard img").bind({
+			mousemove: function (e) {
+				$("div.mytooltip").css({
+					"left": e.pageX + "px",
+					"top": e.pageY + "px"
+				});
+			},
+			mouseover: function () {
+				$("div.mytooltip").html(`<b>해치웠나?</b>`);
+				$("div.mytooltip").fadeIn('fast');
+			},
+			mouseout: function () {
+				$("div.mytooltip").fadeOut('fast');
+			}
+		});
+		*/
+		
+		$(document).on("mousemove", "div.mycard img", function(e){
+			$("div.mytooltip").css({
+				"left": e.pageX + "px",
+				"top": e.pageY + "px"
+			});
+		});
+		
+		$(document).on("mouseover", "div.mycard img", function(e){
+			let imgSrc = $(this).attr("src");
+			$("div.mytooltip").html(`<img src="${imgSrc}" style="max-width: 400px;">`);
+			$("div.mytooltip").fadeIn('fast');
+		});
+		
+		$(document).on("mouseout", "div.mycard img", function(e){
+			$("div.mytooltip").fadeOut('fast');
+		});
+		
 	});
 	
 	function grid()
@@ -132,11 +195,17 @@
 			success: function(res){
 				let s = "";
 				$.each(res, function(idx, item){
+					/*
+					내용이 클릭에 따라 나타났다 접혔다 처리하기
+					(강사님 구조: table)
+					*/
 					s += 
 					`
 					<hr>
-					<h4>${item.subject}</h4>
-					<p>${item.content}</p>
+					<h4><b class="subject">${item.subject}</b></h4>
+					<div style="margin-left: 20px; color: gray;" class="innercontent">
+						<pre>${item.content}</pre>
+					</div>
 					<span class="listwriter">${item.writer}</span>&nbsp;
 					<span class="day">${item.writeday}</span>&nbsp;
 					<span class="visit">조회수 ${item.readcount}</span>
@@ -145,6 +214,11 @@
 				})
 				
 				$(".contents").html(s);
+				
+				// 초기값: 전체 content 안보이게 하기
+				$("div.innercontent").hide();
+				// 초기값 : 첫번째 content만 보이도록
+				$("div.innercontent").eq(0).show();
 			},
 			statusCode: {
 				404: function(){
@@ -155,6 +229,8 @@
 				}
 			}
 		});
+		
+		
 	}
 </script>
 </head>
@@ -166,6 +242,14 @@
 	
 	<div class="contents">
 		
+	</div>
+	
+	<div class="mytooltip">
+		Java<br>
+		HTML5<br>
+		SpringBoot<br>
+		React<br>
+		jQuery
 	</div>
 </body>
 </html>
