@@ -29,7 +29,7 @@
 	
 	i.plusbtn {
 		font-size: 30px;
-		color: darkgreen;
+		color: royalblue;
 		cursor: pointer;
 	}
 	
@@ -94,6 +94,7 @@
 			let blood = this.blood.value;
 			let phone = this.phone.value;
 			// DB에 삽입
+			// 선생님 풀이: formData = $(this).serialize() 활용
 			$.ajax({
 				type: "get",
 				dataType: "html",
@@ -108,6 +109,8 @@
 					$("#addingname").val("");
 					$("#addingblood").val("");
 					$("#addingphone").val("");
+					// 선생님의 추가 구현: 이름에 자동 포커스
+					$("#addingname").focus();
 				}
 			});
 		})
@@ -223,7 +226,7 @@
 					</tr>
 					<tr>
 						<td colspan="2" style="text-align: center">
-							<input type="submit" class="btn btn-outline-success" id="addingbtn" value="추가"></input>
+							<input type="submit" class="btn btn-outline-primary" id="addingbtn" value="데이터 추가"></input>
 						</td>
 					</tr>
 				</table>
