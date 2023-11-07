@@ -28,9 +28,6 @@ try {
 	
 	// 업로드된 실제 파일명. 업로드 안했을 경우는 null
 	String image = multipartRequest.getFilesystemName("image"); // 업로드된 실제 파일명! getParameter로 받으면 null값 나온다.
-	// null인 경우, DB에 따로 표시해 저장(나는 "none"이라고 하겠음)
-	if (image == null)
-		image = "none";
 	
 	// dto에 넣기
 	dto.setRoomcode(roomcode);

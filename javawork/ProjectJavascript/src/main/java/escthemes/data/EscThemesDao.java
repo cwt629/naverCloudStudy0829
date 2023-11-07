@@ -237,7 +237,15 @@ public class EscThemesDao {
 
 	// update
 	public void updateTheme(EscThemesDto dto) {
-		String sql = "update escthemes set themename = ?, genre = ?, cafename = ?, region = ?, explanation = ?, image = ? where roomcode = ?";
+		String sql = "";
+
+		// 사진을 수정한 경우와 수정하지 않은 경우 따로 한다
+		if (dto.getImage() == null) {
+			sql = "update escthemes set themename = ?, genre = ?, cafename = ?, region = ?, explanation = ? where roomcode = ?";
+		} else {
+			sql = "update escthemes set themename = ?, genre = ?, cafename = ?, region = ?, explanation = ?, image = '"
+					+ dto.getImage() + "' where roomcode = ?";
+		}
 
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -250,8 +258,7 @@ public class EscThemesDao {
 			pstmt.setString(3, dto.getCafename());
 			pstmt.setString(4, dto.getRegion());
 			pstmt.setString(5, dto.getExplanation());
-			pstmt.setString(6, dto.getImage());
-			pstmt.setString(7, dto.getRoomcode());
+			pstmt.setString(6, dto.getRoomcode());
 			// 실행
 			pstmt.execute();
 
