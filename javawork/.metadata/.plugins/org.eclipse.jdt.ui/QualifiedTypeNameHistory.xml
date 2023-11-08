@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="bit701.day0919.Ex4_ServerChat"/>
     <fullyQualifiedTypeName name="java.lang.Runnable"/>
     <fullyQualifiedTypeName name="java.lang.ArrayIndexOutOfBoundsException"/>
@@ -50,14 +49,15 @@
     <fullyQualifiedTypeName name="student.data.StudentDto"/>
     <fullyQualifiedTypeName name="java.sql.Timestamp"/>
     <fullyQualifiedTypeName name="mysql.db.DbConnect"/>
-    <fullyQualifiedTypeName name="java.util.Vector"/>
     <fullyQualifiedTypeName name="escmembers.data.EscMembersDto"/>
     <fullyQualifiedTypeName name="escreviews.data.EscReviewsDto"/>
     <fullyQualifiedTypeName name="escreviews.data.EscReviewsDao"/>
     <fullyQualifiedTypeName name="escthemes.data.EscThemesDao"/>
     <fullyQualifiedTypeName name="escthemes.data.EscThemesDto"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.Vector"/>
+    <fullyQualifiedTypeName name="myshop.dto.MyShopDto"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
 </qualifiedTypeNameHistroy>
