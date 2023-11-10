@@ -25,7 +25,7 @@
 	주소: ${addr}
 	</h3>
 	<c:forEach var="url" items="${food}">
-		<img src="../../photo/${url}">
+		<img src="../../photo/${url}" width="200" height="200" border="3">
 	</c:forEach>
 </body>
 </html>

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 //@RequestMapping("/shop") // 모든 파일이 /shop으로 시작하는 경우만..
@@ -87,4 +88,27 @@ public class ShopController {
 		
 		return "list3";
 	}
+	
+	// 선생님 구현: ModelAndView 활용
+	//@GetMapping("/food/photo/detail")
+	public ModelAndView detail()
+	{
+		ModelAndView mview = new ModelAndView();
+		
+		List<String> food = new ArrayList<String>();
+		// 3개의 음식사진들
+		food.add("1.jpg");
+		food.add("6.jpg");
+		food.add("12.jpg");
+		
+		mview.addObject("food", food);
+		mview.addObject("name", "장원태");
+		mview.addObject("addr", "서울시 강남구");
+		
+		mview.setViewName("list3");
+		
+		return mview;
+	}
+	
+
 }

@@ -22,7 +22,7 @@
 	<h3 class="alert alert-info">${message}</h3>
 	<h5><fmt:formatDate value="${today}" pattern="yyyy-MM-dd HH:mm"/></h5>
 	<c:forEach var="url" items="${list}">
-		<img src="../../photo/${url}">
+		<img src="../../photo/${url}" width="200" height="200" border="1">
 	</c:forEach>
 </body>
 </html>

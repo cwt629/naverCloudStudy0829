@@ -11,6 +11,9 @@ public class TestMainAnnoEx6 {
 		//AnnoCar car1 = (AnnoCar)ctx.getBean("annoCar");
 		AnnoCar car1 = (AnnoCar)ctx.getBean("mycar");
 		car1.myCarInfo();
+		
+		AnnoCar2 car2 = (AnnoCar2)ctx.getBean("mycar2");
+		car2.myCarInfo();
 	}
 
 }
