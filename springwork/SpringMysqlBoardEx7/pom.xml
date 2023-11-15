@@ -119,7 +119,7 @@
 		
 		<!-- additional -->
 		
-		<!-- lombok -->
+		<!-- lombok(default in spring boot) -->
 		<dependency>
 		    <groupId>org.projectlombok</groupId>
 		    <artifactId>lombok</artifactId>
