@@ -42,8 +42,14 @@
 					<td>
 						<a href="./content?num=${dto.num}" style="color: black; text-decoration: none;">
 						${dto.subject}
+						<!-- 이미지 아이콘 -->
 						<c:if test="${dto.photo != 'no'}">
 							<i class="bi bi-image photoicon"></i>
+						</c:if>
+						<!-- 댓글 개수 -->
+						<c:if test="${dto.acount > 0}">
+							&nbsp;
+							<span style="color: red;">(${dto.acount})</span>
 						</c:if>
 						</a>
 					</td>
