@@ -24,4 +24,21 @@ public class MemoDao {
 	{
 		return session.selectList(nameSpace + "selectAllMemos");
 	}
+	
+	/* 20231117 */
+	
+	public void deleteMemo(int num)
+	{
+		session.delete(nameSpace + "deleteMemo", num);
+	}
+	
+	public void updateLikes(int num)
+	{
+		session.update(nameSpace + "updateLikesByNum", num);
+	}
+	
+	public int getCountLikes(int num)
+	{
+		return session.selectOne(nameSpace + "countLikes", num);
+	}
 }

@@ -2,7 +2,9 @@ package data.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -70,5 +72,25 @@ public class MemoRestController {
 	public List<MemoDto> getAllMemo()
 	{
 		return memoDao.getAllMemos();
+	}
+	
+	@GetMapping("/memo/delete")
+	public void deleteMemo(@RequestParam int num)
+	{
+		memoDao.deleteMemo(num);
+	}
+	
+	@GetMapping("/memo/likes")
+	public Map<String, Integer> countLikes(@RequestParam int num)
+	{
+		// 1. 좋아요 수 증가
+		memoDao.updateLikes(num);
+		
+		// 2. 증가된 좋아요 수 얻기
+		int likes = memoDao.getCountLikes(num);
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("likes", likes);
+		return map;
 	}
 }

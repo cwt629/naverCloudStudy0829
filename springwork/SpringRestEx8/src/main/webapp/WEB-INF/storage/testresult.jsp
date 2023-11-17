@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HOME</title>
+<title>Naver Storage Test Result</title>
 <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Permanent+Marker&family=Single+Day&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -18,29 +18,15 @@
 </style>
 </head>
 <body>
-	<h3 class="alert alert-danger">Spring REST 예제들</h3>
-	
-	<ul>
-		<li>
-			<a href="./memo/list">간단한 메모 - 사진 1장 업로드 포함</a>
-		</li>
-		<li>
-			<a href="./storage/form">네이버 스토리지에 사진 올려보기 연습</a>
-		</li>
-		<li>
-			<a href="./storage/common">네이버 스토리지 사진 DB 저장</a>
-		</li>
-	</ul>
+	<h5>80 x 80 사진</h5>
+	<img src="${photo80}" border="1">
 	<hr>
-	<!--  
-	<h5>80x80</h5>
-	<img src="https://9bsqlbeu1646.edge.naverncp.com/hH4v64dItE/photo/9.jpg?type=f&w=80&h=80&faceopt=true&ttype=jpg">
-	
-	<h5>150x150</h5>
-	<img src="https://9bsqlbeu1646.edge.naverncp.com/hH4v64dItE/photo/9.jpg?type=f&w=150&h=150&faceopt=true&ttype=jpg">
-	
+	<h5>150 x 150 사진</h5>
+	<img src="${photo150}" border="1">
+	<hr>
 	<h5>원본 사진</h5>
-	<img src="https://kr.object.ncloudstorage.com/bitcamp-701-cwt629/photo/9.jpg">
-	-->
+	<img src="${photo}" border="1">
+	<hr>
+	
 </body>
 </html>

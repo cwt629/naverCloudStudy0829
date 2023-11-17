@@ -6,7 +6,11 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
       <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+      <!-- instructor's db -->
+	  <property name="url" value="jdbc:mysql://db-jbno2-kr.vpc-pub-cdb.ntruss.com:3306/studydb?serverTimezone=Asia/Seoul"></property>
+      <!-- my db      
       <property name="url" value="jdbc:mysql://db-jbnog-kr.vpc-pub-cdb.ntruss.com:3306/studydb?serverTimezone=Asia/Seoul"></property>
+ 		-->
       <property name="username" value="study"></property> 
       <property name="password" value="bitcamp123!@#"></property> 
    </bean>
