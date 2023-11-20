@@ -14,10 +14,23 @@
    body * {
        font-family: 'Jua';
    }
+   
+   div.list .box {
+       width: 400px;
+       height: 100px;
+       margin-bottom: 10px;
+       border: 2px solid gray;
+       border-radius: 30px;
+       box-shadow: 3px 3px 3px gray;
+       padding: 10px;
+   }
   
 </style>
 <script>
 	$(function(){
+		//$(".photo1").hide(); // 150사진 안보임 처리
+		//$(".photo2").hide(); // 원본사진 안보임 처리
+		
 		list();
 		$("#upload").change(function(){
 			let form = new FormData();
@@ -45,25 +58,104 @@
 				data: form,
 				success: function(res){
 					//alert(res); // 랜덤 파일명 확인 후 이미지 출력
+					console.log(res)
 					$(".photo80").attr("src", res);
 				}
 			});
 		});
 		
 		$("#btnsend").click(function(){
+			let title = $("#title").val();
+			if (title.length == 0) {
+				alert("제목을 입력해주세요.");
+				return;
+			}
 			
+			$.ajax({
+				type: "post",
+				dataType: "text",
+				url: "./adddb",
+				data: {"title": title},
+				success: function(res){
+					list();
+					// 제목 지우기
+					$("#title").val("");
+				}
+			});
 		});
+		
+		// photo150 이벤트
+		$(document).on("mouseover", ".photo150", function(){
+			$(this).next().css("display", "block");
+		});
+		$(document).on("mouseout", ".photo150", function(){
+			$(this).next().css("display", "none");
+		});
+		
+		// photo_or 이벤트
+		$(document).on("mouseover", ".photo_or", function(){
+			$(this).next().css("display", "block");
+		});
+		$(document).on("mouseout", ".photo_or", function(){
+			$(this).next().css("display", "none");
+		});
+		
+		// 삭제 이벤트
+		$(document).on("click", ".photodel", function(){
+			let num = $(this).attr("num");
+			if (!confirm("정말로 삭제할겨?")) return; // self
+			
+			$.ajax({
+				type: "get",
+				dataType: "text",
+				url: "./delete",
+				data: {"num": num},
+				success: function(res){
+					list(); // 삭제 후 목록 다시 출력
+				}
+			});
+		});
+		
 	});
 	
 	function list()
 	{
-		
+		$.ajax({
+			type: "get",
+			dataType: "json",
+			url: "./list",
+			success: function(res){
+				let s = "";
+				$.each(res, function(idx, item){
+					s += 
+						`
+						<div class="box">
+							<img src="\${item.photo80}" onerror="this.src = '../res/upload/default.gif'"
+							width=80 height=80 align=left hspace=10>
+							<span>\${item.title}</span>
+							<span style="margin-left: 20px; cursor: pointer; color: red;" class="photodel" num="\${item.num}">삭제</span>
+							<br>
+							<div class="photo150" style="cursor: pointer;">150사진 확인</div>
+							<div class="photo1" style="display: none;">
+								<img src="\${item.photo150}">
+							</div>
+							<div class="photo_or" style="cursor: pointer;">원본사진 확인</div>
+							<div class="photo2" style="display: none;">
+								<img src="\${item.photo}">
+							</div>
+						</div>
+						`;
+				});
+				
+				$("div.list").html(s);
+			}
+		});
 	}
 </script>
 </head>
 <body>
 	<h4>스토리지에 사진 올리기</h4>
-	<div class="input-group" style="width: ">
+	<div class="input-group" style="width: 600px;">
 		<input type="text" id="title" style="width: 200px;" class="form-control" placeholder="제목 넣기...">
 		<input type="file" id="upload" style="width: 200px;" class="form-control">
 		<button type="button" id="btnsend">서버 전송</button>

@@ -33,13 +33,20 @@ public class PhotoStorageController {
 		String fileName = storageService.uploadFile(bucketName, bucketFolder, upload);
 		
 		/* 사진들의 경로를 받는데, 내가 올렸던 이미지 경로에서 파일명만 fileName을 넣어주면 된다. */
-		// 원본사진 경로
-		String photo = "https://kr.object.ncloudstorage.com/bitcamp-701-cwt629/photo/" + fileName;
-		// 150*150 프로필 사진 경로
-		String photo150 = "https://9bsqlbeu1646.edge.naverncp.com/hH4v64dItE/photo/" + fileName + "?type=f&w=150&h=150&faceopt=true&ttype=jpg";
-		// 80*80 프로필 사진 경로
-		String photo80 = "https://9bsqlbeu1646.edge.naverncp.com/hH4v64dItE/photo/" + fileName + "?type=f&w=80&h=80&faceopt=true&ttype=jpg";
-		
+//		// 원본사진 경로
+//		String photo = "https://kr.object.ncloudstorage.com/bitcamp-701-cwt629/photo/" + fileName;
+//		// 150*150 프로필 사진 경로
+//		String photo150 = "https://9bsqlbeu1646.edge.naverncp.com/hH4v64dItE/photo/" + fileName + "?type=f&w=150&h=150&faceopt=true&ttype=jpg";
+//		// 80*80 프로필 사진 경로
+//		String photo80 = "https://9bsqlbeu1646.edge.naverncp.com/hH4v64dItE/photo/" + fileName + "?type=f&w=80&h=80&faceopt=true&ttype=jpg";
+//		
+		//원본사진경로
+		String photo="https://kr.object.ncloudstorage.com/bitcamp-lmh/photo/"+fileName;
+		//150*150
+		String photo150="https://fr2k01411649.edge.naverncp.com/82uyvvqSQa/photo/"+fileName+"?type=f&w=150&h=150&faceopt=true&ttype=jpg";
+		//80*80
+		String photo80="https://fr2k01411649.edge.naverncp.com/82uyvvqSQa/photo/"+fileName+"?type=f&w=80&h=80&faceopt=true&ttype=jpg";
+
 		model.addAttribute("photo", photo);
 		model.addAttribute("photo80", photo80);
 		model.addAttribute("photo150", photo150);
