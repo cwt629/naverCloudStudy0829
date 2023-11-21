@@ -14,3 +14,16 @@ create table photodb (
     photo150 varchar(200),
     writeday datetime
 );
+
+create table memberdb (
+	num smallint auto_increment primary key,
+    name varchar(20),
+    pass varchar(20),
+    photo varchar(100),
+    hp varchar(30),
+    email varchar(100),
+    gaipday datetime
+);
+
+/* memberdb에 id 빠져서 이거 넣어줌 */
+alter table memberdb add myid varchar(20);
