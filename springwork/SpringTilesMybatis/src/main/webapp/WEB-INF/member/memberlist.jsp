@@ -103,26 +103,33 @@
 </head>
 <body>
 	<div>
-		<h4>현재 총 ${totalCount}명의 회원이 있습니다.</h4>
-		<br><br>
-		<div class="input-group" style="width: 400px;">
-			<select id="field" class="form-select">
-				<option hidden selected disabled>--검색 필드--</option>
-				<option value="name">이름</option>
-				<option value="myid">아이디</option>
-				<option value="hp">핸드폰</option>
-				<option value="email">이메일</option>
-			</select>
-			<input type="text" class="form-control" style="margin-left: 10px;"
-			id="word" placeholder="검색단어 입력...">
-			
-			<button type="button" class="btn btn-success btn-sm" id="btnsearch"
-			style="margin-left: 10px;">검색</button>
-			
-			<div class="searchlist" style="margin-top: 20px;">
-			
+		<c:if test="${sessionScope.loginok != null}">
+			<h4>현재 총 ${totalCount}명의 회원이 있습니다.</h4>
+			<br><br>
+			<div style="width: 900px;">
+				<div class="input-group" style="width: 400px;">
+				
+					<select id="field" class="form-select">
+						<option hidden selected disabled>--검색 필드--</option>
+						<option value="name">이름</option>
+						<option value="myid">아이디</option>
+						<option value="hp">핸드폰</option>
+						<option value="email">이메일</option>
+					</select>
+					<input type="text" class="form-control" style="margin-left: 10px;"
+					id="word" placeholder="검색단어 입력...">
+					
+					<button type="button" class="btn btn-success btn-sm" id="btnsearch"
+					style="margin-left: 10px;">검색</button>
+				</div>
+				<div class="searchlist" style="margin-top: 20px; height: 300px; overflow: auto;">
+				
+				</div>
 			</div>
-		</div>
+		</c:if>
+		<c:if test="${sessionScope.loginok == null}">
+			<h1 style="color: red;">로그인하셔야 열람할 수 있습니다.</h1>
+		</c:if>
 	</div>
 </body>
 </html>

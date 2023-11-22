@@ -15,8 +15,9 @@
        font-family: 'Jua';
    }
    
-   h2.hometitle {
+   b.hometitle {
        color: red;
+       font-size: 33px;
        text-shadow: 2px 2px 2px gray;
    }
    
@@ -34,7 +35,7 @@
 <body>
 	<c:set var="root" value="<%=request.getContextPath() %>"/>
 	
-	<h2 class="hometitle">비트캠프에 당도한 것을 환영하오 낯선 이여</h2>
+	<b class="hometitle">비트캠프에 당도한 것을 환영하오 낯선 이여</b>
 	<div class="albumrow">
 		<img src="${root}/res/photo/allthebox.png">
 		<img src="${root}/res/photo/blacknight.png">

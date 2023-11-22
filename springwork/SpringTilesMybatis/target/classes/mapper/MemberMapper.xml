@@ -24,4 +24,30 @@
 	<delete id="deleteMember" parameterType="int">
 		delete from memberdb where num=#{num}
 	</delete>
+	
+	<!-- 20231122 -->
+	
+	<!-- 로그인 체크 -->
+	<select id="loginCheck" parameterType="Map" resultType="int">
+		select count(*) from memberdb where myid = #{myid} and pass = #{pass}
+	</select>
+	<!-- 아이디나 번호로 데이터 받기 -->
+	<select id="selectDataById" parameterType="String" resultType="MemberDto">
+		select * from memberdb where myid = #{myid}
+	</select>
+	<select id="selectDataByNum" parameterType="int" resultType="MemberDto">
+		select * from memberdb where num = #{num}
+	</select>
+	<!-- 
+	프사 수정
+	 
+	Session에 num을 넣을지 id를 넣을지 모른다...
+	보통 id를 넣다보니, id 가지고 수정하는 경우가 많다고 함.
+	-->
+	<update id="updatePhotoByNum" parameterType="Map">
+		update memberdb set photo = #{photo} where num = #{num}
+	</update>
+	<update id="updatePhotoById" parameterType="Map">
+		update memberdb set photo = #{photo} where myid = #{myid}
+	</update>
 </mapper>

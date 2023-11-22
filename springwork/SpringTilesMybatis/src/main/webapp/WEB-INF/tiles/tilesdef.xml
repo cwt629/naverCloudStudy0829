@@ -10,6 +10,10 @@
 		<put-attribute name="info" value="/WEB-INF/layout/info.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
 		<put-attribute name="home" value="/WEB-INF/layout/home.jsp"/>
+		<!-- 20231122 -->
+		<!--  
+		<put-attribute name="login" value="/WEB-INF/login/loginmain.jsp"/>
+		-->
 	</definition>
 	
 	<!-- layout1 macro -->
