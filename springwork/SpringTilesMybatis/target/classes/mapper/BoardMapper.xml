@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mini.dao.BoardDao">
+	<select id="totalCountOfBoard" resultType="int">
+		select count(*) from boarddb
+	</select>
+	<!-- 각 페이지에 출력할 게시물들 -->
+	<select id="selectPagingOfBoard" parameterType="Map" resultType="BoardDto">
+		select * from boarddb
+		order by regroup desc, restep asc
+		limit #{start},#{perpage}
+	</select>
+	<!-- num값 중 최대값(단, 아예 없을 수 있으므로 ifnull 활용) -->
+	<select id="selectMaxNumOfBoard" resultType="int">
+		select ifnull(max(num), 0) from boarddb
+	</select>
 	
+	<!-- 답글 달 때, 같은 그룹 중 전달받은 restep보다 큰 행의 restep을 +1 해주기 -->
+	<update id="updateRestepOfBoard" parameterType="Map">
+		update boarddb set restep = restep + 1
+		where regroup = #{regroup} and restep &gt; #{restep}
+	</update>
+	
+	<!-- auto increment되었던 그 아이디값을 BoardDto에 넣어준다? -->
+	<insert id="insertBoard" parameterType="BoardDto">
+		insert into boarddb (writer, myid, subject, content, regroup, restep, relevel, writeday) 
+		values (#{writer}, #{myid}, #{subject}, #{content}, #{regroup}, #{restep}, #{relevel}, now())
+		<selectKey keyProperty="num" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 내용 보기 관련 -->
+	<update id="updateReadCountOfBoard" parameterType="int">
+		update boarddb set readcount = readcount + 1 where num = #{num}
+	</update>
+	<select id="selectDataByNum" parameterType="int" resultType="BoardDto">
+		select * from boarddb where num = #{num}
+	</select>
 </mapper>
