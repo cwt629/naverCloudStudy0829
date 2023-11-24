@@ -86,4 +86,16 @@ public class BoardService {
 	{
 		return boardDao.getData(num);
 	}
+	
+	/* 20231124 */
+	
+	public void updateBoard(BoardDto dto)
+	{
+		boardDao.updateBoard(dto);
+	}
+	
+	public void deleteBoard(int num)
+	{
+		boardDao.deleteBoard(num);
+	}
 }

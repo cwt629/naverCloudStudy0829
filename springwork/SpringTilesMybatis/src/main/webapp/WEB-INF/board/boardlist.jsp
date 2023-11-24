@@ -43,7 +43,7 @@
 					${no}
 					<c:set var="no" value="${no - 1}"/>
 				</td>
-				<td>
+				<td style="text-align: left;">
 					<%-- 제목 --%>
 					
 					<!-- 답글 level 1당 2칸씩 띄우기 -->
@@ -58,6 +58,12 @@
 					<!-- 제목 표시 -->
 					<a href="./content?num=${dto.num}&currentPage=${currentPage}">
 						${dto.subject}
+						<c:if test="${dto.photocount == 1}">
+							<i class="bi bi-image" style="color: gray;"></i>
+						</c:if>
+						<c:if test="${dto.photocount > 1}">
+							<i class="bi bi-images" style="color: gray;"></i>
+						</c:if>
 					</a>
 				</td>
 				<td>${dto.writer}</td>

@@ -23,4 +23,16 @@ public class BoardFileService {
 	{
 		return boardFileDao.getPhotoByNum(num);
 	}
+	
+	/* 20231124 */
+	
+	public List<BoardFileDto> getFileDataByNum(int num)
+	{
+		return boardFileDao.getFileDataByNum(num);
+	}
+	
+	public void deletePhoto(int idx)
+	{
+		boardFileDao.deletePhoto(idx);
+	}
 }

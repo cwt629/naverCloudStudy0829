@@ -18,4 +18,6 @@ public class BoardDto {
 	private int relevel;
 	private List<String> photoNames;
 	private Timestamp writeday;
+	/* 20231124 */
+	private int photocount; // 첨부된 사진의 개수
 }

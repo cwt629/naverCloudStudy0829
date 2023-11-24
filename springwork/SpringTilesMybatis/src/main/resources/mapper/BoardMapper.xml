@@ -21,7 +21,12 @@
 		where regroup = #{regroup} and restep &gt; #{restep}
 	</update>
 	
-	<!-- auto increment되었던 그 아이디값을 BoardDto에 넣어준다? -->
+	<!-- auto increment되었던 그 아이디값을 BoardDto에 넣어준다 -->
+	<!-- 
+		방금 boarddb에 들어간 num값이 뭔지 알아내고,
+		그 값이 board_file에도 필요하기 때문에
+		BoardDto에 넣어준다
+	 -->
 	<insert id="insertBoard" parameterType="BoardDto">
 		insert into boarddb (writer, myid, subject, content, regroup, restep, relevel, writeday) 
 		values (#{writer}, #{myid}, #{subject}, #{content}, #{regroup}, #{restep}, #{relevel}, now())
@@ -37,4 +42,14 @@
 	<select id="selectDataByNum" parameterType="int" resultType="BoardDto">
 		select * from boarddb where num = #{num}
 	</select>
+	
+	<!-- 20231124 -->
+	<!-- 내용 수정 -->
+	<update id="updateBoard" parameterType="BoardDto">
+		update boarddb set subject = #{subject}, content = #{content} where num = #{num}
+	</update>
+	<!-- 게시물 삭제 -->
+	<delete id="deleteBoard" parameterType="int">
+		delete from boarddb where num = #{num}
+	</delete>
 </mapper>

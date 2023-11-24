@@ -8,4 +8,15 @@
 	<select id="selectAllPhotoByNum" parameterType="int" resultType="String">
 		select photoname from board_file where num = #{num}
 	</select>
+	
+	<!-- 20231124 -->
+	
+	<!-- 이미지를 list에서 띄워주기 위해 모든 데이터 받아오기 -->
+	<select id="selectAllDataByNum" parameterType="int" resultType="BoardFileDto">
+		select * from board_file where num = #{num}
+	</select>
+	<!-- 인덱스를 받아 사진 삭제 -->
+	<delete id="deletePhotoByIdx" parameterType="int">
+		delete from board_file where idx = #{idx}
+	</delete>
 </mapper>

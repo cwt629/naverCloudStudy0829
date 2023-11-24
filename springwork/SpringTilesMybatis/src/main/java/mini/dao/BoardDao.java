@@ -52,4 +52,15 @@ public class BoardDao {
 	{
 		return session.selectOne(nameSpace + "selectDataByNum", num);
 	}
+	
+	/* 20231124 */
+	public void updateBoard(BoardDto dto)
+	{
+		session.update(nameSpace + "updateBoard", dto);
+	}
+	
+	public void deleteBoard(int num)
+	{
+		session.delete(nameSpace + "deleteBoard", num);
+	}
 }

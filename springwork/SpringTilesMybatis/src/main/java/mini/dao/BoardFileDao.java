@@ -25,4 +25,16 @@ public class BoardFileDao {
 	{
 		return session.selectList(nameSpace + "selectAllPhotoByNum", num);
 	}
+	
+	/* 20231124 */
+	
+	public List<BoardFileDto> getFileDataByNum(int num)
+	{
+		return session.selectList(nameSpace + "selectAllDataByNum", num);
+	}
+	
+	public void deletePhoto(int idx)
+	{
+		session.delete(nameSpace + "deletePhotoByIdx", idx);
+	}
 }
