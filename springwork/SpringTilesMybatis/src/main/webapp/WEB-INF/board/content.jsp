@@ -21,6 +21,123 @@
    }
   
 </style>
+<script>
+	$(function(){
+		list();
+		
+		// 댓글 카메라 클릭 시 파일 업로드 버튼 실행
+		$(".uploadcamera").click(function(){
+			$("#upload").trigger("click");
+		});
+		
+		// 사진 업로드
+		$("#upload").change(function(){
+			let formData = new FormData();
+			// 참고: 파일 여러개면 i에 대해 for문 돌리면서 files[i]로 넣어주기?
+			formData.append("upload", $("#upload")[0].files[0]);
+			$.ajax({
+				type: "post",
+				dataType: "json",
+				url: "../answer/upload",
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function(res){
+					// 업로드 후에 반환받은 파일명을 댓글의 이미지에 넣어준다
+					$("img.answerphoto").attr("src", `../res/upload/\${res.photoname}`);
+				}
+			});
+		});
+		
+		// 댓글 추가 이벤트
+		$("#btnansweradd").click(function(){
+			let msg = $("#answermsg").val();
+			let num = ${dto.num};
+			if (msg.length == 0) {
+				alert("댓글 내용을 입력하세요.");
+				return;
+			}
+			//alert(msg + ":" + num);
+			
+			$.ajax({
+				type: "post",
+				dataType: "text",
+				url: "../answer/insert",
+				data: {"num": num, "msg": msg},
+				success: function(res){
+					// DB insert 성공 후 댓글 목록 다시 출력
+					list();
+					// 입력창 초기화
+					$("#answermsg").val("");
+					// 댓글 사진 초기화
+					$("img.answerphoto").attr("src", "../res/photo/noimage.png");
+				}
+			});
+		});
+		
+		// 댓글 삭제 이벤트
+		$(document).on("click", ".ansdel", function(){
+			if (!confirm("정말로 해당 댓글을 삭제하시겠습니까?")) return;
+			
+			let ansidx = $(this).attr("ansidx");
+			$.ajax({
+				type: "get",
+				dataType: "text",
+				url: "../answer/delete",
+				data: {"ansidx": ansidx},
+				success: function(res){
+					// DB delete 성공 후 댓글 목록 다시 출력
+					list();
+				}
+			});
+		});
+	}); // end of function
+	
+	function list()
+	{
+		let num = ${dto.num};
+		
+		// 댓글 출력하는 함수
+		$.ajax({
+			type: "get",
+			dataType: "json",
+			url: "../answer/list",
+			data: {"num": num},
+			success: function(res){
+				$("#answercount").text("댓글 " + res.length);
+				
+				let s = "";
+				$.each(res, function(idx, item){
+					s += 
+					`
+					\${item.ansname}(\${item.ansid}) : 
+					`;
+					if (item.ansphoto != null){
+						s += 
+							`
+							<img src="../res/upload/\${item.ansphoto}" width=60 height=60 border=1 hspace=20>
+							`;
+					}
+					s += 
+						`<span style="margin-left: 20px;">\${item.ansmsg}</span>
+						&nbsp;
+						<span style="color: gray; font-size: 0.9em;">\${item.writeday}</span>
+						`;
+					
+					// 본인으로 로그인한 상태에서만 삭제 버튼이 보인다
+					if (${sessionScope.loginok != null} && item.ansid == "${sessionScope.myid}"){
+						s += `<i class="bi bi-trash ansdel" ansidx="\${item.ansidx}" style="cursor: pointer;"></i>`;
+					}
+					
+					s += "<br>";
+					
+				});
+				
+				$("div.answerlist").html(s);
+			}
+		});
+	}
+</script>
 </head>
 <body>
 	<div>
@@ -46,7 +163,25 @@
 				<br><br>
 			</c:if>
 		</div>
-		<div>
+		<div style="text-align: left;">
+			<!-- 20231127: 댓글 -->
+			<div id="answercount">댓글 0</div>
+			<div class="answerlist" style="margin-left: 10px;">
+				
+			</div>
+			<c:if test="${sessionScope.loginok != null}">
+				<div class="answerform input-group" style="text-align: left; width: 600px;">
+					<input type="file" id="upload" style="display: none;">
+					<i class="bi bi-camera-fill uploadcamera" style="cursor: pointer; font-size: 23px;"></i>
+					<img src="" class="answerphoto" width="50" height="50" border="1"
+					onerror="this.src = '../res/photo/default.gif'" hspace="10">
+					
+					<input type="text" class="form-control" style="width: 300px;" placeholder="댓글내용"
+					id="answermsg">
+					<button type="button" class="btn btn-sm btn-outline-success" id="btnansweradd">저장</button>
+				</div>
+			</c:if>
+		
 			<!-- 새 글: 파라미터를 아무것도 넘기지 않으므로, default로 처리 -->
 			<button type="button" class="btn btn-outline-secondary btn-sm"
 			style="width: 80px;"
@@ -72,6 +207,7 @@
 				onclick="location.href = './delete?num=${dto.num}&currentPage=${currentPage}'">삭제</button>
 			</c:if>
 		</div>
+		<div id="answerend"></div> <!-- 댓글부 자동 이동용 div -->
 	</div>
 </body>
 </html>

@@ -20,4 +20,6 @@ public class BoardDto {
 	private Timestamp writeday;
 	/* 20231124 */
 	private int photocount; // 첨부된 사진의 개수
+	/* 20231127 */
+	private int acount; // 댓글 개수를 저장할 변수
 }

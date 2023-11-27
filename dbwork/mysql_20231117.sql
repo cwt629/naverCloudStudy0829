@@ -66,3 +66,11 @@ create table board_answer (
     num smallint,
     constraint fk_answer_num foreign key(num) references boarddb(num) on delete cascade
 );
+
+create table guestdb (
+	guest_num smallint auto_increment primary key,
+    guest_nickname varchar(30),
+    guest_photo varchar(100),
+    guest_content varchar(1000),
+    guest_writeday datetime
+);
