@@ -23,4 +23,10 @@ public class FaceController {
 		
 		return map;
 	}
+	
+	@GetMapping("/face/deeper/deeper/test")
+	public String deeptest()
+	{
+		return "face/deeper/test";
+	}
 }

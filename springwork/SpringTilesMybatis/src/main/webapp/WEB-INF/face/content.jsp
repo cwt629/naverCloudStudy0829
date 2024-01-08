@@ -28,5 +28,6 @@
 		<img src="" id="facephoto" style="max-width: 400px;">
 		<div id="photoinfo" style="margin-left: 5px; width: 300px;">결과출력ㅋ</div>
 	</div>
+	<a href="face/deeper/deeper/test">디퍼 고?</a>
 </body>
 </html>

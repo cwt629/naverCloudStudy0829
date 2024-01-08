@@ -17,22 +17,39 @@
   
 </style>
 <script>
-	const END_POINT = "http://apis.data.go.kr/B551011/Durunubi";
+	const BASE_URL = "http://apis.data.go.kr/B551011/KorService1";
 	const ENC_KEY = "t%2BaPlQWgYTpT%2FIe4h2Ew%2FDfmCh3lHWaleDh311A5XZPa3DWZ3uiXuJ6se8aI4oO188kaRL6xO11aHuCw3VPtfw%3D%3D";
-	
+	const DEC_KEY = "t+aPlQWgYTpT/Ie4h2Ew/DfmCh3lHWaleDh311A5XZPa3DWZ3uiXuJ6se8aI4oO188kaRL6xO11aHuCw3VPtfw=="
+	const REQUEST_CATEGORY = "areaBasedList1";
 	$(function(){
-		$.ajax({
+		$("#apicall").click(function(){
+			$.ajax({
 			type: "get",
-			dataType: "json",
-			url: "http://apis.data.go.kr/B551011/Durunubi/courseList?serviceKey=" + ENC_KEY + "&pageNo=1&numOfRows=10&MobileOS=ETC&MobileApp=AppTest&crsKorNm=밀양강&crsLevel=2&brdDiv= DNBW",
+			url: `\${BASE_URL}/\${REQUEST_CATEGORY}`,
+			data: {
+				"MobileOS": "ETC",
+				"MobileApp": "testing",
+				"_type": "json",
+				"contentTypeId": "12",
+				"serviceKey": ENC_KEY
+			},
 			success: function(res){
 				console.log(res);
+				$("#apiresultalarm").text("된다 콘솔 봐봐라");
+			},
+			error: function(err){
+				console.log("Error Occurred: ");
+				console.log(err);
 			}
 		});
+		})
+		
 	})
 </script>
 </head>
 <body>
 	<h2>되냐?</h2>
+	<button type="button" class="btn btn-outline-secondary" id="apicall">호출해보기</button>
+	<div id="apiresultalarm"></div>
 </body>
 </html>
