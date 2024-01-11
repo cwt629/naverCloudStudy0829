@@ -48,6 +48,12 @@
 						<a th:href="@{/detail(num=${dto.num})}" style="cursor: pointer; color: black; text-decoration: none;">
 							<img th:src="@{https://iz6vc4kf2116.edge.naverncp.com/sXzyw0ncRr/bootmyshop/{photo}?type=f&w=40&h=40&faceopt=true&ttype=jpg(photo=${dto.carphoto})}" hspace="10">
 							[[${dto.carname}]]
+							
+							<!-- 댓글 개수 -->
+							<span style="margin-left: 10px; color: red;"
+							th:if="${dto.commentcount > 0}">
+								([[${dto.commentcount}]])
+							</span>
 						</a>
 					</td>
 					<td class="colortd">
