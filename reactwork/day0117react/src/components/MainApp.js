@@ -4,6 +4,7 @@ import TwoApp from './TwoApp';
 import ThreeApp from './ThreeApp';
 import FourApp from './FourApp';
 import './MyStyle.css';
+import FiveApp from './FiveApp';
 
 const MainApp = () => {
     const [index, setIndex] = useState(1);
@@ -35,12 +36,18 @@ const MainApp = () => {
                     defaultValue={4}
                     onClick={onChangeApp} />FourApp
             </label>
+            <label style={{ marginLeft: '20px' }}>
+                <input type='radio' name='myapp'
+                    defaultValue={5}
+                    onClick={onChangeApp} />FiveApp
+            </label>
             <hr />
             {
                 (index === 1) ? <OneApp />
                     : (index === 2) ? <TwoApp />
                         : (index === 3) ? <ThreeApp />
-                            : <FourApp />
+                            : (index === 4) ? <FourApp />
+                                : <FiveApp />
             }
         </div>
     );
