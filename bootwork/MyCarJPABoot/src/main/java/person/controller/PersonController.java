@@ -2,6 +2,7 @@ package person.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import person.data.PersonDao;
 import person.data.PersonDto;
 
+@CrossOrigin // 데이터 잘 못 가져오는 경우 추가해주자.
 @RestController
 @RequiredArgsConstructor
 public class PersonController {
@@ -43,5 +45,21 @@ public class PersonController {
 	{
 		System.out.println("delete >> " + num);
 		personDao.deletePerson(num);
+	}
+	
+	// dto 반환
+	@GetMapping("/person/select")
+	public PersonDto select(@RequestParam("pnum") int pnum)
+	{
+		System.out.println("select >> " + pnum);
+		return personDao.getSelectedData(pnum);
+	}
+	
+	// 수정
+	@PostMapping("/person/update")
+	public void update(@RequestBody PersonDto dto)
+	{
+		System.out.println("update >> " + dto);
+		personDao.updatePerson(dto);
 	}
 }
