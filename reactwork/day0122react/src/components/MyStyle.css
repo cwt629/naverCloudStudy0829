@@ -1,0 +1,36 @@
+.main {
+    margin: 30px;
+}
+
+ul.menu {
+    list-style: none;
+}
+
+ul.menu li {
+    float: left;
+    width: 90px;
+    height: 60px;
+    line-height: 60px;
+    border: 2px solid gray;
+    margin-right: 5px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    background-color: darksalmon;
+}
+
+ul.menu li:hover {
+    background-color: chocolate;
+    transition: background-color 0.8s;
+}
+
+/* NavLink 태그에 대해서는 a태그로 스타일 줘야 함 */
+ul.menu li a {
+    text-decoration: none;
+    color: black;
+}
+
+ul.menu li a:hover {
+    color: crimson;
+    transition: color 0.8s;
+}
