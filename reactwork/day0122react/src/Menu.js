@@ -25,7 +25,7 @@ const Menu = () => {
                     <NavLink to={'/sweet'}>SweetAlert</NavLink>
                 </li>
                 <li>
-                    <NavLink to={'/query'}>QueryString</NavLink>
+                    <NavLink to={'/query?color=pink&name=lee&addr=seoul'}>QueryString</NavLink>
                 </li>
 
             </ul>
