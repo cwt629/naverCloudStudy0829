@@ -33,3 +33,14 @@ ul.menu li a:hover {
     color: palevioletred;
     transition: color 0.5s;
 }
+
+div.memberCard {
+    width: 600px;
+    height: 350px;
+    border-radius: 20px;
+    background-color: burlywood;
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 5px 5px 5px gray;
+}
