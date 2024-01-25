@@ -61,6 +61,7 @@ public class SecurityConfiguration {
 			.requestMatchers("/images/**").permitAll()
 			.requestMatchers("/member/*").permitAll() // member/뭐시기 에 대해 모두 허용(없으면 403(forbidden) 뜨더라)
 			.requestMatchers("/login/auth").permitAll() // login 관련
+			.requestMatchers("/board/**").permitAll() // board 관련
 			
 			//이외의 요청은 인증된 사용자만 사용자만 사용가능
 			.anyRequest().authenticated();					

@@ -44,3 +44,8 @@ div.memberCard {
     padding: 20px;
     box-shadow: 5px 5px 5px gray;
 }
+
+.pagenum {
+    text-decoration: none;
+    margin-right: 5px;
+}
